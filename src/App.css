@@ -30,3 +30,7 @@ body {
   background-color: #eeeeee;
   padding-top: 10px;
 }
+
+a {
+  text-decoration: none;
+}

@@ -3,12 +3,13 @@ import './Header.css'
 import { Card, Col, Container, Row } from "react-bootstrap"
 
 const Header = () => {
+
   return (
     <Container fluid>
       <Row>
         <Col className="card-title" md={6}>
           <h1 className='title'>AdviceHealth</h1>
-          <p className='sub-title'>Área de trabalho</p>
+          <p className='sub-title'>Testes Prático</p>
         </Col>
         <Col md={2} className='user'>
           <Card className={'card'}>
