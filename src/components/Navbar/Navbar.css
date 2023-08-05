@@ -1,0 +1,23 @@
+.chevron-double {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 20px;
+}
+
+.chevron-double-icon {
+  color: #4f4d4d;
+  height: 10px;
+  width: 10px;
+}
+
+.icons {
+  display: flex;
+  flex-direction: column;
+}
+
+.icon {
+  margin-bottom: 10px;
+  height: 40px;
+  width: 30px;
+  border-radius: 25%;
+}

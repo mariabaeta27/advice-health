@@ -11,7 +11,6 @@ html {
 
 body {
   min-height: 100vh;
-  /* max-width: 400px; */
   background-color: papayawhip;
   margin: 0 auto;
 }
@@ -21,7 +20,6 @@ body {
   min-height: 10vh;
   padding-top: 10px;
   padding-left: 30px;
-
 }
 
 .body {
@@ -29,5 +27,6 @@ body {
 }
 
 .navBar {
-  background-color: coral;
+  background-color: #eeeeee;
+  padding-top: 10px;
 }
