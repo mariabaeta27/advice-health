@@ -1,16 +1,15 @@
-// import { useState } from 'react'
-// import reactLogo from './assets/react.svg'
-// import viteLogo from '/vite.svg'
-
-import { Col, Container, Row } from 'react-bootstrap'
 import './App.css'
+import { Col, Container, Row } from 'react-bootstrap'
+import { Header } from './components'
 
 function App() {
 
   return (
     <Container fluid>
-      <Row className="cabecalho">
-        <Col>Cabeçalho</Col>
+      <Row className="header shadow-sm  mb-2 bg-body-tertiary rounded">
+        <Col>
+          <Header />
+        </Col>
       </Row>
       <Row className='body'>
         <Col md={2} className='navBar'>Navbar</Col>

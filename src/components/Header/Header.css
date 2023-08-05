@@ -1,0 +1,36 @@
+.card-title {
+  padding-left: 200px;
+}
+
+.title {
+  color: #4f4d4d;
+  font-size: xx-large;
+  font-weight: bold;
+}
+
+.sub-title {
+  color: #9b9b9b;
+  font-size: small;
+}
+
+
+.user {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin-left: 420px;
+  margin-top: 10px;
+}
+
+.card {
+  background-color: #dddcdc;
+  border-radius: 100%;
+  height: 30px;
+  margin-bottom: 5px;
+  width: 30px;
+}
+
+.sub-title-user {
+  color: #9b9b9b;
+  text-transform: uppercase
+}

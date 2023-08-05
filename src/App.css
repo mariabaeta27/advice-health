@@ -1,6 +1,27 @@
-.cabecalho {
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  min-height: 100vh;
+  /* max-width: 400px; */
+  background-color: papayawhip;
+  margin: 0 auto;
+}
+
+.header {
+  background-color: #eeeeee;
   min-height: 10vh;
-  background-color: blue;
+  padding-top: 10px;
+  padding-left: 30px;
+
 }
 
 .body {
