@@ -1,0 +1,30 @@
+.notification-card {
+  background-color: #c0c0c0;
+  border-radius: 100%;
+  height: 50px;
+  margin: 5px;
+  width: 50px;
+}
+
+.notifications {
+  display: flex;
+  background-color: #d9d9d9;
+  height: 60px;
+  margin-bottom: 5px;
+  margin-left: 15px;
+  width: 300px;
+  padding-top: 1px;
+}
+
+.notifications-text {
+  margin-top: 5px;
+  margin-left: 10px;
+}
+
+.notifications-text h3 {
+  color: #d9d9d9;
+}
+
+.notifications-text h5 {
+  color: #928f8f;
+}

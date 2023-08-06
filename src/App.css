@@ -11,12 +11,12 @@ html {
 
 body {
   min-height: 100vh;
-  background-color: papayawhip;
+  background-color: #eeeeee;
   margin: 0 auto;
 }
 
 .header {
-  background-color: #eeeeee;
+  background-color: #f6f4f4;
   min-height: 10vh;
   padding-top: 10px;
   padding-left: 30px;
@@ -27,10 +27,6 @@ body {
 }
 
 .navBar {
-  background-color: #eeeeee;
+  background-color: #f6f4f4;
   padding-top: 10px;
-}
-
-a {
-  text-decoration: none;
 }

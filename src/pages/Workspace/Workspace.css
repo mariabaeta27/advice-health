@@ -1,0 +1,89 @@
+.workspace {
+  display: flex;
+  justify-content: space-between;
+}
+
+.workspace-primary {
+  background-color: white;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 100vh;
+  width: 100%;
+}
+
+.input-card-primary {
+  background-color: #dddcdc;
+  border: 1px solid;
+  border-color: #dddcdc;
+  border-radius: 2px;
+  margin-left: 100px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  padding: 5px;
+  width: 600px;
+}
+
+.icon-query {
+  left: 680px;
+  height: 20px;
+  position: absolute;
+  top: 24px;
+  width: 20px;
+}
+
+.dashboard {
+  margin-left: 100px;
+}
+
+.dashboard-title {
+  color: #9b9b9b;
+  font-weight: 300;
+  letter-spacing: 0.5px;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+}
+
+.cards {
+  display: flex;
+  margin-bottom: 30px;
+}
+
+.card-primary {
+  border: 1px solid #dddcdc;
+  border-radius: 0;
+  height: 250px;
+  margin-right: 20px;
+  width: 300px;
+}
+
+.card-secundary {
+  width: 280px;
+  border: 1px solid #dddcdc;
+  height: 121px;
+  border-radius: 0;
+}
+
+.notice {
+  margin-left: 100px;
+  margin-right: 100px;
+  margin-top: 15px;
+}
+
+.notice-title {
+  color: #9b9b9b;
+  font-weight: 300;
+  letter-spacing: 0.5px;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+}
+
+.workspace-secundary {
+  width: 100%;
+  padding-left: 70px;
+}
+
+.workspace-calendar {
+  margin-bottom: 10px;
+}

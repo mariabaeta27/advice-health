@@ -4,6 +4,7 @@ import { Header, Navbar } from './components'
 import { useState } from 'react'
 import { BuildingOfficeIcon, CalendarDaysIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline'
 import { Route, Routes } from 'react-router-dom'
+import { Workspace } from './pages'
 
 
 const routes = [
@@ -11,7 +12,7 @@ const routes = [
     label: 'Área de Trabalho',
     icon: <BuildingOfficeIcon data-toggle="tooltip" data-placement="right" title="Área de trabalho" />,
     route: '/',
-    element: <><p>Home</p></>
+    element: <Workspace />
   },
   {
     label: 'Agendamento de Consulta',
@@ -35,7 +36,7 @@ function App() {
 
   return (
     <Container fluid>
-      <Row className="header shadow-sm  mb-1 bg-body-tertiary rounded">
+      <Row className="header shadow-sm mb-1 bg-body-tertiary rounded">
         <Col>
           <Header />
         </Col>

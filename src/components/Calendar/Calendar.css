@@ -1,0 +1,49 @@
+.calendar {
+  background-color: #7c7c7c;
+  width: 300px;
+  height: 300px;
+}
+
+.header-calendar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  text-transform: uppercase;
+  font-weight: 100;
+  font-size: x-large;
+  color: #dddcdc;
+}
+
+.chevron-icon {
+  color: #4f4d4d;
+  height: 20px;
+  width: 20px;
+}
+
+.week-day {
+  color: white;
+  font-weight: 300;
+  padding: 10px;
+}
+
+
+.calendar-td {
+  background-color: #d9d9d9;
+  padding: 1px;
+  text-align: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 20px;
+}
+
+.day {
+  background-color: #c9acae;
+  padding: 1px;
+  text-align: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 20px;
+}

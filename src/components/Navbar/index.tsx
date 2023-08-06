@@ -50,7 +50,6 @@ const Navbar = ({ open, setOpen, routes }: {
   }
 
 
-
   return (
     <div>
       <div className="chevron-double">
