@@ -7,12 +7,16 @@ const Notification = ({ notification }: {
     id: number;
     text: string;
     subText: string;
+    /* eslint-disable @typescript-eslint/no-explicit-any */
+    icon?: any
   }
 }) => {
   return (
     <div key={notification?.id} className="notifications">
       <div className="notifications-card">
-        <Card className={'notification-card'} />
+        <Card className={'notification-card'}>
+          {notification?.icon}
+        </Card>
       </div>
       <div className="notifications-text">
         <div>

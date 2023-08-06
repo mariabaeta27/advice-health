@@ -1,10 +1,21 @@
 
-import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'
+import { CalendarIcon, CheckCircleIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline'
 import './Workspace.css'
 import { Card } from 'react-bootstrap'
 import { Calendar, Notifications, Tables } from '../../components'
+import { bodyTableWorkspace, headersTableWorkspace } from '../../constants'
+
+
+
+const notificationsWorkspace = [
+  { id: 1, text: 'Pagamento recebido', subText: 'Paciente Luiz', icon: <CheckCircleIcon /> },
+  { id: 2, text: 'Lembrete de consulta', subText: 'Paciente Fernanda', icon: <CalendarIcon /> },
+  { id: 3, text: 'Pagamento recebido', subText: 'Paciente Fernanda', icon: <CheckCircleIcon /> }
+]
+
 
 const Workspace = () => {
+
   return (
     <div className='workspace'>
       <div className='workspace-primary'>
@@ -31,7 +42,7 @@ const Workspace = () => {
         <div className='notice'>
           <h3 className='notice-title'>Avisos / Lembrentes</h3>
           <div>
-            <Tables />
+            <Tables headers={headersTableWorkspace} bodyTable={bodyTableWorkspace} />
           </div>
         </div>
       </div>
@@ -41,7 +52,7 @@ const Workspace = () => {
             <Calendar />
           </div>
           <div className='workspace-notificantons'>
-            <Notifications />
+            <Notifications notifications={notificationsWorkspace} />
           </div>
         </div>
       </div>
