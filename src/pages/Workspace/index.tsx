@@ -40,7 +40,7 @@ const Workspace = () => {
           <div className='workspace-calendar'>
             <Calendar />
           </div>
-          <div className='workspace-notificantonss'>
+          <div className='workspace-notificantons'>
             <Notifications />
           </div>
         </div>

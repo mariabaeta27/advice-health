@@ -1,0 +1,25 @@
+.shedule {
+  display: flex;
+  justify-content: space-between;
+}
+
+.shedule-primary {
+  background-color: #eeeeee;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 100vh;
+  width: 38%;
+}
+
+.shedule-title {
+  color: #9b9b9b;
+  font-weight: 300;
+  letter-spacing: 0.5px;
+  margin: 15px;
+  text-transform: uppercase;
+}
+
+
+.shedule-secundary {}

@@ -4,7 +4,7 @@ import { Header, Navbar } from './components'
 import { useState } from 'react'
 import { BuildingOfficeIcon, CalendarDaysIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline'
 import { Route, Routes } from 'react-router-dom'
-import { Workspace } from './pages'
+import { Query, Shedule, Workspace } from './pages'
 
 
 const routes = [
@@ -18,13 +18,13 @@ const routes = [
     label: 'Agendamento de Consulta',
     icon: <CalendarDaysIcon data-toggle="tooltip" data-placement="right" title="Agendamento de consulta" />,
     route: '/agendamento-de-consulta',
-    element: <>Agenda</>
+    element: <Shedule />
   },
   {
     label: 'Consulta de Agendamentos',
     icon: <MagnifyingGlassIcon data-toggle="tooltip" data-placement="right" title="Consulta de Agendamento" />,
     route: '/consulta-de-agendamentos',
-    element: <>Consulta</>
+    element: <Query />
 
   }
 ]
