@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 import { BuildingOfficeIcon, CalendarDaysIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline'
 import { Route, Routes } from 'react-router-dom'
 import { Query, Shedule, Workspace } from './pages'
-import { bodyTableWorkspace } from './constants'
+import { bodyTableWorkspace, patients, times } from './constants'
 
 
 const routes = [
@@ -37,8 +37,16 @@ function App() {
 
   useEffect(() => {
     const keyBodyTableWorkspace = localStorage.getItem('bodyTableWorkspace')
+    const keyPatients = localStorage.getItem('patients')
+    const keyTimes = localStorage.getItem('times')
     if (!keyBodyTableWorkspace) {
       localStorage.setItem('bodyTableWorkspace', JSON.stringify(bodyTableWorkspace))
+    }
+    if (!keyPatients) {
+      localStorage.setItem('patients', JSON.stringify(patients))
+    }
+    if (!keyTimes) {
+      localStorage.setItem('times', JSON.stringify(times))
     }
   }, [])
 

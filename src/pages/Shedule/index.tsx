@@ -1,10 +1,13 @@
+
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './Shedule.css'
 import { UserCircleIcon } from '@heroicons/react/24/outline'
 import { Calendar, AddShedule, Notifications, Times } from '../../components'
 
-import './Shedule.css'
-import { patients, times } from '../../constants'
 import { useEffect, useState } from 'react'
 import { Patient, Time } from '../../types'
+
 
 const notificationsShedule = [
   { id: 1, text: 'Dr. Felipe Baeta', subText: 'Ortodontista', icon: <UserCircleIcon /> },
@@ -15,107 +18,113 @@ const notificationsShedule = [
 const Shedule = () => {
   const [open, setOpen] = useState(false)
   const [contolerTimes, setControlerTimes] = useState<Time[]>()
-  const [timeSelected, setTime] = useState<Time | undefined>()
-  const [patient, setPatient] = useState<Patient | undefined>()
-  const [loading, setLoading] = useState<boolean>(false)
+  const [timeSelected, setTimeSelected] = useState<Time | undefined>()
+  const [patientEdit, setPatientEdit] = useState<Patient | undefined>()
+  const [timesAvailable, setTimesAvailable] = useState<Time | undefined>()
+
+
   const [patientsFormated, setPatientsFormated] = useState<Patient[] | undefined>()
 
-  useEffect(() => {
-    setControlerTimes(times)
-    setPatientsFormated(patients)
 
+  const getData = () => {
+    const times = localStorage.getItem('times')
+    const patients = localStorage.getItem('patients')
+    const availableTimes = times && JSON.parse(times)?.filter((t: Time) => !t.block && t.schedule === undefined)
+
+    setControlerTimes(times && JSON.parse(times))
+    setPatientsFormated(patients && JSON.parse(patients))
+    setTimesAvailable(availableTimes)
+  }
+
+  useEffect(() => {
+    getData()
   }, [])
 
-  /* eslint-disable @typescript-eslint/no-explicit-any */
+
+  const postPatient = ({ name, cpf, bday, address }: any) => {
+    if (patientEdit) {
+      const newPatients = patientsFormated?.map((p) => {
+        if (p.id === patientEdit.id) {
+          return {
+            id: p?.id,
+            name: name?.value,
+            document: cpf?.value,
+            bday: bday?.value,
+            address: address?.value,
+          }
+        } else {
+          return {
+            ...p
+          }
+        }
+      })
+      setPatientsFormated(newPatients)
+      localStorage.setItem('patients', JSON.stringify(newPatients))
+    } else {
+      const newPatients = patientsFormated && [...patientsFormated, {
+        id: patientsFormated?.length,
+        name: name?.value,
+        document: cpf?.value,
+        bday: bday?.value,
+        address: address?.value,
+      }]
+      setPatientsFormated(newPatients)
+      localStorage.setItem('patients', JSON.stringify(newPatients))
+    }
+  }
+
   const onSubmit = (form: any) => {
     form.preventDefault()
 
-    setLoading(true)
+    const { name, service, absent } = form.target;
 
-    const { name, cpf, bday, address, service, absent } = form.target;
-    if (!absent.checked) {
-      if (patient) {
-        const newPatients = patientsFormated?.map((p) => {
-          if (p.id === patient.id) {
-            return {
-              id: p.id,
-              name: name.value,
-              document: cpf?.value,
-              bday: bday?.value,
-              address: address?.value,
-            }
-          } else {
-            return {
-              ...p
-            }
-          }
-        })
-        setPatientsFormated(newPatients)
-      } else {
 
-        const newPatients = [...patients, {
-          id: patients?.length,
-          name: name.value,
-          document: cpf?.value,
-          bday: bday?.value,
-          address: address?.value,
-        }]
-        setPatientsFormated(newPatients)
-      }
+    if (!absent.checked && !patientEdit) {
+      postPatient(form.target)
     }
 
-    debugger;
-
-
-
-    const newTimes = times.map((time) => {
+    const newTimes = contolerTimes?.map((time) => {
       if (time.id === timeSelected?.id && !absent.checked) {
-
         return {
           ...time,
-          schedule: {
-            title: `${name?.value}`,
+          schedule: name?.value && service?.value && patientsFormated?.length ? {
+            title: name?.value,
             subtext: service?.value,
-            patientId: patients?.length,
-          },
+            patientId: patientEdit ? patientEdit?.id : patientsFormated?.length,
+          } : undefined,
           block: absent?.checked
         }
       } else if (time.id === timeSelected?.id && absent.checked) {
         return {
           ...time,
-          block: absent?.checked
+          schedule: undefined,
+          block: absent?.checked,
         }
       } else {
         return time
       }
     })
 
-
-
-
     setControlerTimes(newTimes)
-    setLoading(false)
+    localStorage.setItem('times', JSON.stringify(newTimes))
+    setOpen(false)
   }
 
   const addQuery = (time: Time) => {
-    setLoading(true)
     setOpen(true);
-    setTime(time)
-    setPatient(undefined)
-    setLoading(false)
+    setTimeSelected(time)
+    setPatientEdit(undefined)
   }
 
   const editQuery = (time: Time) => {
-    setLoading(true)
+    setTimeSelected(time)
+    const newPatient = patientsFormated?.filter((p) => p.id === time?.schedule?.patientId)
+    setPatientEdit(newPatient && newPatient[0])
     setOpen(true);
-    setTime(time)
-    const newPatient = patients?.filter((p) => p.id === timeSelected?.schedule?.patientId && p)
-    setPatient(newPatient[0])
-    setLoading(false)
   }
 
   const deleteQuery = (time: Time) => {
-    const newTimes = times.map((t) => {
+    const newTimes = contolerTimes?.map((t) => {
       if (t.id === time.id) {
         return {
           ...t,
@@ -128,7 +137,33 @@ const Shedule = () => {
       }
     })
     setControlerTimes(newTimes)
+    localStorage.setItem('times', JSON.stringify(newTimes))
   }
+
+
+
+  const editTime = (newTime: string, time: Time) => {
+    const newTimes = contolerTimes?.map((t) => {
+      if (t.time === newTime) {
+        return {
+          ...time,
+          time: newTime
+        }
+      } else if (t.time === time.time) {
+        return {
+          ...t,
+          schedule: undefined
+        }
+      } else {
+        return t
+      }
+    })
+    setControlerTimes(newTimes)
+    localStorage.setItem('times', JSON.stringify(newTimes))
+  }
+
+
+
 
   return (
     <>
@@ -144,11 +179,12 @@ const Shedule = () => {
           <h3>20/Ago 2023</h3>
           {contolerTimes?.map((time) =>
             <div key={time.id}>
-              <Times time={time} addQuery={addQuery} editQuery={editQuery} deleteQuery={deleteQuery} />
+              <Times time={time} addQuery={addQuery} editQuery={editQuery} deleteQuery={deleteQuery} times={timesAvailable} editTime={editTime} />
             </div>)}
         </div>
       </div>
-      <AddShedule open={open && !loading} setOpen={setOpen} onSubmit={onSubmit} time={timeSelected} patient={patient} />
+      <AddShedule open={open} setOpen={setOpen} onSubmit={onSubmit} time={timeSelected} patient={patientEdit} />
+
     </>
   )
 }

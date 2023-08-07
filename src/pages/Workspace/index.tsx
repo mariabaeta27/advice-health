@@ -77,12 +77,8 @@ const Workspace = () => {
   })
 
   const search = (value: string) => {
-    // if (!value.length) {
-    //   setFilterBody(nativeBody)
-    // } else {
     const newBody = nativeBody?.filter(({ patient }) => patient && patient.toLowerCase().includes(value.toLowerCase()))
     setFilterBody(newBody)
-    // }
   }
 
   const deleteSeach = () => {
@@ -117,11 +113,9 @@ const Workspace = () => {
         </div>
         <div className='notice'>
           <h3 className='notice-title'>Avisos / Lembrentes</h3>
-          {/* {loading ? (<p>Loading...</p>) : ( */}
           <div>
             <Tables headers={headersTableWorkspace} bodyTable={body} columns={cols} />
           </div>
-          {/* )} */}
         </div>
       </div>
       <div>

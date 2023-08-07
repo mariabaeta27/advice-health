@@ -1,14 +1,17 @@
-import { Card } from 'react-bootstrap'
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { Card, Dropdown } from 'react-bootstrap'
 import './Times.css'
 import { CalendarDaysIcon, PencilIcon, PlusCircleIcon, TrashIcon } from '@heroicons/react/20/solid'
 import { CheckCircleIcon, XCircleIcon } from '@heroicons/react/24/outline'
 import { Time } from '../../types'
 
-const Times = ({ time, addQuery, editQuery, deleteQuery }: {
+const Times = ({ time, addQuery, editQuery, deleteQuery, times, editTime }: {
   time: Time,
   addQuery: (time: Time) => void,
   editQuery: (time: Time) => void,
-  deleteQuery: (time: Time) => void
+  deleteQuery: (time: Time) => void,
+  editTime: (newTime: string, time: Time) => void,
+  times: any;
 }) => {
 
   return (
@@ -56,7 +59,23 @@ const Times = ({ time, addQuery, editQuery, deleteQuery }: {
             <div className='time-icons'>
               {time.schedule ? (
                 <div className='time-icons'>
-                  <CalendarDaysIcon className='time-icon' />
+                  <Dropdown>
+                    <Dropdown.Toggle style={{ backgroundColor: '#eee7e7', border: '0px', color: '#4f4d4d' }} id="dropdown-basic">
+                      <CalendarDaysIcon className='time-icon' />
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu>
+
+                      {times?.map((t: Time) => (
+                        <Dropdown.Item
+                          key={t.id}
+                          onClick={(e: any) => editTime(e.target.innerText, time)}
+                          eventKey={t.time}
+                        >
+                          {t.time}
+                        </Dropdown.Item>
+                      ))}
+                    </Dropdown.Menu>
+                  </Dropdown>
                   <TrashIcon className='time-icon' onClick={() => deleteQuery(time)} />
                   <PencilIcon className='time-icon' onClick={() => editQuery(time)} />
                 </div>

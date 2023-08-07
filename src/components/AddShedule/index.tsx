@@ -14,14 +14,24 @@ const AddShedule = ({ open, setOpen, onSubmit, time, patient }: {
 }) => {
   const [absent, setAbsent] = useState(false)
 
+
+  useEffect(() => {
+    setAbsent(false)
+  }, [])
+
   useEffect(() => {
     if (time?.block) {
       setAbsent(time.block)
+    } else {
+      setAbsent(false)
     }
-  }, [])
+  }, [time])
 
   return (
-    <Offcanvas show={open} onHide={() => setOpen(false)} placement="end">
+    <Offcanvas show={open} onHide={() => {
+      setOpen(false)
+      setAbsent(false)
+    }} placement="end">
       <Offcanvas.Header closeButton>
         <Offcanvas.Title className="title-off-canvas">Agendar</Offcanvas.Title>
       </Offcanvas.Header>
@@ -36,7 +46,7 @@ const AddShedule = ({ open, setOpen, onSubmit, time, patient }: {
             />
             <label className="absent-input">Ausente</label>
           </div>
-          <>
+          {(!absent && !time?.block) && (<>
             <label>Nome completo</label>
             <input
               type="text"
@@ -45,6 +55,7 @@ const AddShedule = ({ open, setOpen, onSubmit, time, patient }: {
               name="name"
               defaultValue={patient?.name}
               disabled={time?.block || absent}
+              required
             />
             <div className="personl-data">
               <div>
@@ -55,18 +66,20 @@ const AddShedule = ({ open, setOpen, onSubmit, time, patient }: {
                   className="input-form"
                   name="cpf"
                   defaultValue={patient?.document}
-                  disabled={time?.block || absent}
+                  disabled={time?.block}
+                  required
                 />
               </div>
               <div>
                 <label>Data de nascimento</label>
                 <input
-                  type='date'
+                  type='text'
                   placeholder="Aniversário"
                   className="input-form"
                   name="bday"
-                  // value={patient?.bday && new Date(patient?.bday)}
-                  disabled={time?.block || absent}
+                  defaultValue={patient?.bday}
+                  disabled={time?.block}
+                  required
                 />
               </div>
             </div>
@@ -77,7 +90,8 @@ const AddShedule = ({ open, setOpen, onSubmit, time, patient }: {
               className="input-form"
               name="address"
               defaultValue={patient?.address}
-              disabled={time?.block || absent}
+              disabled={time?.block}
+              required
             />
             <label>Procedimento</label>
             <input
@@ -86,12 +100,22 @@ const AddShedule = ({ open, setOpen, onSubmit, time, patient }: {
               className="input-form"
               name="service"
               defaultValue={time?.schedule?.subtext}
-              disabled={time?.block || absent}
+              disabled={time?.block}
+              required
             />
-          </>
-
+          </>)}
           <input type="submit" className="button-form" />
         </form>
+        {
+          (!absent && !time?.block && !time?.schedule) && (
+            <p className="value">
+              <span>
+                Valor Pago:
+              </span>
+              R$100,00
+            </p>
+          )
+        }
       </Offcanvas.Body>
     </Offcanvas >
   )
