@@ -1,10 +1,23 @@
 import { Patient } from "../types"
-
-
 const patients: Patient[] = [
   { id: 1, name: 'João da Mata', document: '000.000.000-00', bday: '28/06/1993', address: 'Rua 1' },
   { id: 0, name: 'Felipe Silva Rocha', document: '000.000.000-00', bday: '27/05/1993', address: 'Rua 2' }
 ]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 const months = [
@@ -53,7 +66,7 @@ const headersTableWorkspace = [
     name: 'Horário'
   },
   {
-    name: 'Local'
+    name: 'Valor'
   },
   {
     name: 'Prioridade'
@@ -71,7 +84,6 @@ const headersTableQuery = [
     },
   },
   { name: 'Paciente' },
-  { name: 'Dr(a)' },
   {
     name: 'Data'
   },
@@ -79,10 +91,10 @@ const headersTableQuery = [
     name: 'Horário'
   },
   {
-    name: 'Local'
+    name: 'Valor'
   },
   {
-    name: 'Prioridade'
+    name: 'Procedimento'
   },
   {
     name: ''
@@ -92,7 +104,7 @@ const headersTableQuery = [
 
 const bodyTableQuery = [
   {
-    id: 1,
+    id: 0,
     status: false,
     name: patients[0].name,
     doctor: 'Dra. Fernanda',
@@ -106,53 +118,17 @@ const bodyTableQuery = [
     name: 'Maria',
     doctor: 'Dra. Fernanda',
     date: '20/08/2023',
-    time: '08:00h',
+    time: '10:00h',
     priority: 'Alta'
   },
   {
-    id: 1,
+    id: 2,
     status: true,
-    name: patients[0].name,
+    name: patients[1].name,
     doctor: 'Dra. Fernanda',
     date: '20/08/2023',
-    time: '08:00h',
-    priority: 'Alta'
-  },
-  {
-    id: 1,
-    status: true,
-    name: patients[0].name,
-    doctor: 'Dra. Fernanda',
-    date: '20/08/2023',
-    time: '08:00h',
-    priority: 'Alta'
-  },
-  {
-    id: 1,
-    status: true,
-    name: patients[0].name,
-    doctor: 'Dra. Fernanda',
-    date: '20/08/2023',
-    time: '08:00h',
-    priority: 'Alta'
-  },
-  {
-    id: 1,
-    status: true,
-    name: patients[0].name,
-    doctor: 'Dra. Fernanda',
-    date: '20/08/2023',
-    time: '08:00h',
-    priority: 'Alta'
-  },
-  {
-    id: 1,
-    status: true,
-    name: patients[0].name,
-    doctor: 'Dra. Fernanda',
-    date: '20/08/2023',
-    time: '08:00h',
-    priority: 'Alta'
+    time: '15:00h',
+    priority: 'Baixa'
   },
 ]
 

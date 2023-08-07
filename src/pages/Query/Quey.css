@@ -1,5 +1,6 @@
 .filters {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   width: 700px;
   align-items: end;
@@ -15,11 +16,29 @@
   font-weight: 600;
 }
 
-.advcanced-filters div {
+.advcanced-filters {
+  display: flex;
+  flex-direction: column;
+}
+
+
+.advcanced-filters>div:first-child {
   display: flex;
   flex-direction: row;
 }
 
 .advcanced-filters p {
   padding-top: 2px;
+}
+
+.advcanced-filters label {
+  margin: 4px;
+  font-weight: 300;
+}
+
+
+.advcanced-filters-radio {
+  display: flex;
+  flex-direction: row;
+
 }

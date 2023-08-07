@@ -3,7 +3,7 @@ import { MagnifyingGlassIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import './Search.css'
 import { useEffect, useState } from 'react';
 
-const Search = ({ search: handleChecked, deleteSeach }: {
+const Search = ({ search: handleSearch, deleteSeach }: {
   search: any,
   deleteSeach: any
 }) => {
@@ -13,7 +13,7 @@ const Search = ({ search: handleChecked, deleteSeach }: {
 
   useEffect(() => {
     if (search) {
-      handleChecked(search)
+      handleSearch(search)
       setShowClearIcon(true)
     } else {
       deleteSeach()
