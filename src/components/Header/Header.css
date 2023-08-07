@@ -2,17 +2,18 @@
   padding-left: 200px;
 }
 
-.title {
+.header-title {
   color: #4f4d4d;
   font-size: xx-large;
   font-weight: bold;
 }
 
-.sub-title {
+.header-sub-title {
   color: #9b9b9b;
   font-size: small;
+  text-transform: uppercase;
+  font-weight: 500;
 }
-
 
 .user {
   align-items: center;

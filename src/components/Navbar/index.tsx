@@ -63,7 +63,7 @@ const Navbar = ({ open, setOpen, routes }: {
                 className="icon d-inline-block"
                 onClick={() => handleSelection(route)}
               >
-                <NavLink style={{ color: route?.selection ? '#4f4d4d' : '#9b9b9b' }} to={route.route}>
+                <NavLink style={{ color: route?.selection ? '#4f4d4d' : '#dddcdc' }} to={route.route}>
                   {route.icon}
                 </NavLink>
               </div>

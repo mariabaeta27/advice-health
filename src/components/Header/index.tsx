@@ -8,8 +8,8 @@ const Header = () => {
     <Container fluid>
       <Row>
         <Col className="card-title" md={6}>
-          <h1 className='title'>AdviceHealth</h1>
-          <p className='sub-title'>Testes Prático</p>
+          <h1 className='header-title'>AdviceHealth</h1>
+          <p className='header-sub-title'>Testes Prático</p>
         </Col>
         <Col md={2} className='user'>
           <Card className={'card'}>
