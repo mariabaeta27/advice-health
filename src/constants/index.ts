@@ -191,11 +191,11 @@ const bodyTableWorkspace = [
 
 
 const times = [
-  { id: 0, time: '08:00', schedule: { title: `Paciente ${patients[0].name}`, subtext: 'Extração do dente 18, 28', patientId: patients[0].id }, block: false },
+  { id: 0, time: '08:00', schedule: { title: `${patients[0].name}`, subtext: 'Extração do dente 18, 28', patientId: patients[0].id }, block: false },
   { id: 1, time: '08:30' },
   { id: 2, time: '09:00', },
   { id: 3, time: '09:30' },
-  { id: 4, time: '10:00', schedule: { title: `Paciente ${patients[1].name}`, subtext: 'Avaliação', patientId: patients[1].id }, block: false },
+  { id: 4, time: '10:00', schedule: { title: `${patients[1].name}`, subtext: 'Avaliação', patientId: patients[1].id }, block: false },
   { id: 5, time: '10:30' },
   { id: 6, time: '11:00' },
   { id: 7, time: '11:30', block: true },

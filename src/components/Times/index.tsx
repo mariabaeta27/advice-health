@@ -27,10 +27,10 @@ const Times = ({ time, addQuery, editQuery, deleteQuery }: {
               </div>
               <div className="notifications-text">
                 <div>
-                  <h4>{time?.schedule?.title}</h4>
+                  <h4 style={{ color: '#4f4d4d' }}>{time?.schedule?.title}</h4>
                 </div>
                 <div>
-                  <h5>{time?.schedule?.subtext}</h5>
+                  <h5 style={{ color: '#9b9b9b' }}>{time?.schedule?.subtext}</h5>
                 </div>
               </div>
             </>
@@ -44,7 +44,7 @@ const Times = ({ time, addQuery, editQuery, deleteQuery }: {
               </div>
               <div className="notifications-text">
                 <div>
-                  <h4>Horario bloqueado</h4>
+                  <h4 style={{ color: '#4f4d4d' }}>Horario bloqueado</h4>
                 </div>
               </div>
             </>

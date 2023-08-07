@@ -18,26 +18,27 @@ const Shedule = () => {
   const [timeSelected, setTime] = useState<Time | undefined>()
   const [patient, setPatient] = useState<Patient | undefined>()
   const [loading, setLoading] = useState<boolean>(false)
-
-
-
+  const [patientsFormated, setPatientsFormated] = useState<Patient[] | undefined>()
 
   useEffect(() => {
     setControlerTimes(times)
+    setPatientsFormated(patients)
+
   }, [])
 
   /* eslint-disable @typescript-eslint/no-explicit-any */
   const onSubmit = (form: any) => {
+    form.preventDefault()
     console.log(timeSelected)
     setLoading(true)
-    form.preventDefault()
+
     const { name, cpf, bday, address, service, absent } = form.target;
     if (!absent.checked) {
       if (patient) {
-        patients.map((p) => {
+        const newPatients = patientsFormated?.map((p) => {
           if (p.id === patient.id) {
             return {
-              ...p,
+              id: p.id,
               name: name.value,
               document: cpf?.value,
               bday: bday?.value,
@@ -49,22 +50,31 @@ const Shedule = () => {
             }
           }
         })
+        setPatientsFormated(newPatients)
       } else {
-        patients.push({
+
+        const newPatients = [...patients, {
           id: patients?.length,
           name: name.value,
           document: cpf?.value,
           bday: bday?.value,
           address: address?.value,
-        })
+        }]
+        setPatientsFormated(newPatients)
       }
     }
+
+    debugger;
+    console.log(times)
+
+
     const newTimes = times.map((time) => {
-      if (timeSelected?.block && time.id === timeSelected?.id && !absent.checked) {
+      if (time.id === timeSelected?.id && !absent.checked) {
+        console.log(time)
         return {
           ...time,
           schedule: {
-            title: `Paciente ${name?.value}`,
+            title: `${name?.value}`,
             subtext: service?.value,
             patientId: patients?.length,
           },
@@ -79,6 +89,10 @@ const Shedule = () => {
         return time
       }
     })
+
+    console.log('AQUI', newTimes)
+
+
     setControlerTimes(newTimes)
     setLoading(false)
   }
@@ -87,6 +101,7 @@ const Shedule = () => {
     setLoading(true)
     setOpen(true);
     setTime(time)
+    setPatient(undefined)
     setLoading(false)
   }
 

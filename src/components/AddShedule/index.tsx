@@ -44,7 +44,7 @@ const AddShedule = ({ open, setOpen, onSubmit, time, patient }: {
               className="input-form"
               name="name"
               defaultValue={patient?.name}
-              disabled={time?.block}
+              disabled={time?.block || absent}
             />
             <div className="personl-data">
               <div>
@@ -55,7 +55,7 @@ const AddShedule = ({ open, setOpen, onSubmit, time, patient }: {
                   className="input-form"
                   name="cpf"
                   defaultValue={patient?.document}
-                  disabled={time?.block}
+                  disabled={time?.block || absent}
                 />
               </div>
               <div>
@@ -66,7 +66,7 @@ const AddShedule = ({ open, setOpen, onSubmit, time, patient }: {
                   className="input-form"
                   name="bday"
                   // value={patient?.bday && new Date(patient?.bday)}
-                  disabled={time?.block}
+                  disabled={time?.block || absent}
                 />
               </div>
             </div>
@@ -77,7 +77,7 @@ const AddShedule = ({ open, setOpen, onSubmit, time, patient }: {
               className="input-form"
               name="address"
               defaultValue={patient?.address}
-              disabled={time?.block}
+              disabled={time?.block || absent}
             />
             <label>Procedimento</label>
             <input
@@ -86,7 +86,7 @@ const AddShedule = ({ open, setOpen, onSubmit, time, patient }: {
               className="input-form"
               name="service"
               defaultValue={time?.schedule?.subtext}
-              disabled={time?.block}
+              disabled={time?.block || absent}
             />
           </>
 

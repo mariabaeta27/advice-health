@@ -12,7 +12,7 @@ const Header = () => {
           <p className='header-sub-title'>Testes Prático</p>
         </Col>
         <Col md={2} className='user'>
-          <Card className={'card'}>
+          <Card className={'card-user'}>
             <UserCircleIcon style={{ color: '#9b9b9b' }} />
           </Card>
           <p className='sub-title-user'>User</p>

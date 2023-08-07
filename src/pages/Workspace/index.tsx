@@ -9,9 +9,9 @@ import { useEffect, useState } from 'react'
 
 
 const notificationsWorkspace = [
-  { id: 1, text: 'Pagamento recebido', subText: 'Paciente Luiz', icon: <CheckCircleIcon /> },
-  { id: 2, text: 'Lembrete de consulta', subText: 'Paciente Fernanda', icon: <CalendarIcon /> },
-  { id: 3, text: 'Pagamento recebido', subText: 'Paciente Fernanda', icon: <CheckCircleIcon /> }
+  { id: 1, text: 'Pagamento recebido', subText: 'Luiz', icon: <CheckCircleIcon /> },
+  { id: 2, text: 'Pagamento recebido', subText: 'Larissa', icon: <CalendarIcon /> },
+  { id: 3, text: 'Pagamento recebido', subText: 'Fernanda', icon: <CheckCircleIcon /> }
 ]
 
 
