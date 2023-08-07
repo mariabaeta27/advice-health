@@ -13,26 +13,6 @@
   width: 100%;
 }
 
-.input-card-primary {
-  background-color: #dddcdc;
-  border: 1px solid;
-  border-color: #dddcdc;
-  border-radius: 2px;
-  margin-left: 100px;
-  margin-bottom: 20px;
-  margin-top: 20px;
-  padding: 5px;
-  width: 600px;
-}
-
-.icon-query {
-  left: 680px;
-  height: 20px;
-  position: absolute;
-  top: 24px;
-  width: 20px;
-}
-
 .dashboard {
   margin-left: 100px;
 }
@@ -51,11 +31,15 @@
 }
 
 .card-primary {
-  border: 1px solid #dddcdc;
-  border-radius: 0;
+  border: 0.5px solid #dddcdc;
+  border-radius: 5px;
   height: 250px;
   margin-right: 20px;
   width: 300px;
+}
+
+.card-primary:hover {
+  border: 0.5px solid #4f4d4d;
 }
 
 .card-secundary {
@@ -63,7 +47,38 @@
   border: 1px solid #dddcdc;
   height: 121px;
   border-radius: 0;
+  align-items: center;
 }
+
+.card-secundary h5 {
+  text-transform: uppercase;
+  color: #4f4d4d;
+  font-weight: 500;
+  text-align: center;
+  font-size: medium;
+  margin-top: 40px;
+}
+
+.card-secundary p {
+  text-transform: uppercase;
+  color: #9b9b9b;
+  font-weight: 300;
+  text-align: center;
+  font-size: small;
+}
+
+.card-primary p {
+  text-transform: uppercase;
+  color: #4f4d4d;
+  font-weight: 500;
+  text-align: center;
+  font-size: medium;
+}
+
+.card-secundary:hover {
+  border: 0.5px solid #4f4d4d;
+}
+
 
 .notice {
   margin-left: 100px;

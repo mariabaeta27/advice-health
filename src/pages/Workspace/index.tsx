@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { CalendarIcon, CheckCircleIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline'
+import { CalendarIcon, CheckCircleIcon } from '@heroicons/react/24/outline'
 import './Workspace.css'
 import { Card } from 'react-bootstrap'
-import { Calendar, Notifications, Tables } from '../../components'
+import { Calendar, Notifications, Search, Tables } from '../../components'
 import { bodyTableWorkspace, headersTableWorkspace } from '../../constants'
 import { useEffect, useState } from 'react'
 
@@ -18,7 +18,17 @@ const notificationsWorkspace = [
 const Workspace = () => {
 
   const cols = ['status', 'patitent', 'date', 'time', 'local', 'priority']
-  const [nativeBody, setNativeBody] = useState<any>()
+
+  const [nativeBody, setNativeBody] = useState<Array<{
+    id: number;
+    status: boolean;
+    data: string;
+    time: string;
+    commitment: string;
+    patient: string;
+    local: string;
+    priority: string;
+  }>>()
 
   useEffect(() => {
     setNativeBody(bodyTableWorkspace)
@@ -42,7 +52,6 @@ const Workspace = () => {
 
 
   nativeBody?.map((item: any) => {
-    console.log(item)
     const data = {
       status: {
         children: <input type="checkbox" checked={item?.status} onChange={() => handleChecked(item?.id)} />
@@ -66,28 +75,34 @@ const Workspace = () => {
     body.push(data)
   })
 
-
+  const handleQuery = (value: string) => {
+    const newBody = bodyTableWorkspace.filter((item) => item.patient.includes(value) && item)
+    setNativeBody(newBody)
+  }
 
   return (
     <div className='workspace'>
       <div className='workspace-primary'>
         <div>
-          <input
-            type="text"
-            className='input-card-primary'
-            placeholder='Buscar'
-          />
-          <MagnifyingGlassIcon className='icon-query' />
+          <Search onClick={handleQuery} />
         </div>
         <div className='dashboard'>
           <h2 className='dashboard-title'>Dashboad</h2>
           <div className='cards'>
             <div>
-              <Card className='card-primary' />
+              <Card className='card-primary'>
+                <p>Agendamentos</p>
+                <img src="../../../public/grafic.jpeg" alt="grafic" />
+              </Card>
             </div>
             <div>
-              <Card className='card-secundary' />
-              <Card className='card-secundary' />
+              <Card className='card-secundary'>
+                <h5>Papelaria</h5>
+                <p>Receituários, Ficha de Anaminese, ...</p>
+              </Card>
+              <Card className='card-secundary'>
+                <h5 style={{ marginTop: '50px' }}>Raio x</h5>
+              </Card>
             </div>
           </div>
         </div>

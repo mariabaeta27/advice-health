@@ -1,0 +1,19 @@
+.input-card {
+  background-color: #dddcdc;
+  border: 1px solid;
+  border-color: #dddcdc;
+  border-radius: 2px;
+  margin-left: 100px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  padding: 5px;
+  width: 600px;
+}
+
+.icon-query {
+  left: 680px;
+  height: 20px;
+  position: absolute;
+  top: 24px;
+  width: 20px;
+}
