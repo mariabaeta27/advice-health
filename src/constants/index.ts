@@ -115,9 +115,22 @@ const bodyTableWorkspace = [
   }
 ]
 
+const times = [
+  { id: 0, time: '08:00', schedule: { title: 'Paciente João da Mata', subtext: 'Extração do dente 18, 28' }, block: false },
+  { id: 1, time: '08:30' },
+  { id: 2, time: '09:00', },
+  { id: 3, time: '09:30' },
+  { id: 4, time: '10:00', schedule: { title: 'Reunião', subtext: 'Comite de formatura' }, block: false },
+  { id: 5, time: '10:30' },
+  { id: 6, time: '11:00' },
+  { id: 7, time: '11:30', block: true },
+  { id: 8, time: '12:00', schedule: { title: 'Almoço', subtext: '-' }, block: false }
+
+]
 
 
-export { months, weeksDay, headersTableWorkspace, bodyTableWorkspace }
+
+export { months, weeksDay, headersTableWorkspace, bodyTableWorkspace, times }
 
 
 

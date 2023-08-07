@@ -4,19 +4,23 @@
   border-radius: 2px;
   box-shadow: 5px 2px 2px rgb(230, 225, 225);
   display: flex;
+  margin-bottom: 8px;
+  height: 60px;
 }
 
 .time {
   margin: 1px 5px;
   font-size: x-large;
   color: #928f8f;
+  padding-top: 8px;
 }
 
 .time-body {
   display: flex;
   margin: 2px 10px;
-  padding-top: 1px;
+  padding-top: 5px;
   border-radius: 5px;
+  width: 500px;
 }
 
 .time-card {
@@ -28,7 +32,6 @@
 .time-icons {
   display: flex;
   align-items: end;
-  padding-left: 220px;
   padding-bottom: 2px;
 }
 
