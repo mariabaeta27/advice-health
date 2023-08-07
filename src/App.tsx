@@ -48,7 +48,7 @@ function App() {
         <Col md={8} className='bg-sucess'>
           <Routes>
             {routes.map((route) => (
-              <Route path={route?.route} element={route?.element} />
+              <Route key={route.label} path={route?.route} element={route?.element} />
             ))}
           </Routes>
         </Col>

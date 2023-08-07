@@ -62,6 +62,7 @@ const Navbar = ({ open, setOpen, routes }: {
           <div className="icons">
             {routesSelection?.map((route) => (
               <div
+                key={route.label}
                 className="icon d-inline-block"
                 onClick={() => handleSelection(route)}
               >

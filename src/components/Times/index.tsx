@@ -2,18 +2,13 @@ import { Card } from 'react-bootstrap'
 import './Times.css'
 import { CalendarDaysIcon, PencilIcon, PlusCircleIcon, TrashIcon } from '@heroicons/react/20/solid'
 import { CheckCircleIcon, XCircleIcon } from '@heroicons/react/24/outline'
+import { Time } from '../../types'
 
-const Times = ({ time, setOpenModal }: {
-  time: {
-    id: number;
-    time: string;
-    schedule?: {
-      title: string;
-      subtext: string;
-    } | undefined;
-    block?: boolean | undefined;
-  },
-  setOpenModal: React.Dispatch<React.SetStateAction<boolean>>
+const Times = ({ time, addQuery, editQuery, deleteQuery }: {
+  time: Time,
+  addQuery: (time: Time) => void,
+  editQuery: (time: Time) => void,
+  deleteQuery: (time: Time) => void
 }) => {
 
   return (
@@ -57,15 +52,21 @@ const Times = ({ time, setOpenModal }: {
         </div>
 
         {
-          !time?.block && (
+          !time?.block ? (
             <div className='time-icons'>
               {time.schedule ? (
                 <div className='time-icons'>
                   <CalendarDaysIcon className='time-icon' />
-                  <TrashIcon className='time-icon' />
-                  <PencilIcon className='time-icon' onClick={() => setOpenModal(false)} />
+                  <TrashIcon className='time-icon' onClick={() => deleteQuery(time)} />
+                  <PencilIcon className='time-icon' onClick={() => editQuery(time)} />
                 </div>
-              ) : (<PlusCircleIcon className='time-icon' onClick={() => setOpenModal(true)} />)}
+              ) : (<PlusCircleIcon className='time-icon' onClick={() => addQuery(time)} />)}
+            </div>
+          ) : (
+            <div className='time-icons'>
+              <div className='time-icons'>
+                <PencilIcon className='time-icon' onClick={() => editQuery(time)} />
+              </div>
             </div>
           )
         }

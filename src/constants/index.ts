@@ -1,3 +1,5 @@
+import { Patient } from "../types"
+
 const months = [
   {
     id: 0,
@@ -115,22 +117,28 @@ const bodyTableWorkspace = [
   }
 ]
 
+const patients: Patient[] = [
+  { id: 1, name: 'João da Mata', document: '000.000.000-00', bday: '28/06/1993', address: 'Rua 1' }
+  , { id: 0, name: 'Felipe Silva Rocha', document: '000.000.000-00', bday: '27/05/1993', address: 'Rua 2' }
+]
+
 const times = [
-  { id: 0, time: '08:00', schedule: { title: 'Paciente João da Mata', subtext: 'Extração do dente 18, 28' }, block: false },
+  { id: 0, time: '08:00', schedule: { title: `Paciente ${patients[0].name}`, subtext: 'Extração do dente 18, 28', patientId: patients[0].id }, block: false },
   { id: 1, time: '08:30' },
   { id: 2, time: '09:00', },
   { id: 3, time: '09:30' },
-  { id: 4, time: '10:00', schedule: { title: 'Reunião', subtext: 'Comite de formatura' }, block: false },
+  { id: 4, time: '10:00', schedule: { title: `Paciente ${patients[1].name}`, subtext: 'Avaliação', patientId: patients[1].id }, block: false },
   { id: 5, time: '10:30' },
   { id: 6, time: '11:00' },
   { id: 7, time: '11:30', block: true },
-  { id: 8, time: '12:00', schedule: { title: 'Almoço', subtext: '-' }, block: false }
+  { id: 8, time: '12:00', block: true }
 
 ]
 
 
 
-export { months, weeksDay, headersTableWorkspace, bodyTableWorkspace, times }
+
+export { months, weeksDay, headersTableWorkspace, bodyTableWorkspace, times, patients }
 
 
 

@@ -1,0 +1,49 @@
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-form {
+  margin-left: 5px;
+  margin-bottom: 8px;
+  height: 30px;
+  border-radius: 2px;
+  border: 1px solid;
+}
+
+.absent {
+  display: flex;
+  justify-content: center;
+}
+
+.absent-input {
+  margin-left: 5px;
+  margin-top: 10px;
+}
+
+.personl-data {
+  display: flex;
+}
+
+.personl-data div {
+  display: flex;
+  flex-direction: column;
+}
+
+.title-off-canvas {
+  color: #9b9b9b;
+  font-weight: 300;
+  letter-spacing: 0.5px;
+  margin-left: 120px;
+  text-transform: uppercase;
+  font-size: xx-large;
+}
+
+.button-form {
+  background-color: #9b9b9b;
+  width: 80px;
+  height: 20px;
+  margin-left: 150px;
+  border-radius: 50px;
+  border: 0px;
+}

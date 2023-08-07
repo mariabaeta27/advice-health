@@ -1,15 +1,10 @@
 
 import { Card } from "react-bootstrap";
 import './Notification.css'
+import { Notification as NotificationTypes } from '../.../../../../types'
 
 const Notification = ({ notification }: {
-  notification: {
-    id: number;
-    text: string;
-    subText: string;
-    /* eslint-disable @typescript-eslint/no-explicit-any */
-    icon?: any
-  }
+  notification: NotificationTypes
 }) => {
   return (
     <div key={notification?.id} className="notifications">
