@@ -1,10 +1,22 @@
-import { Patient } from "../types"
+import { Doctor, Patient, Schedule, Times } from "../types"
+
 const patients: Patient[] = [
   { id: 1, name: 'João da Mata', document: '000.000.000-00', bday: '28/06/1993', address: 'Rua 1' },
-  { id: 0, name: 'Felipe Silva Rocha', document: '000.000.000-00', bday: '27/05/1993', address: 'Rua 2' }
+]
+
+const doctors: Doctor[] = [
+  { id: 0, name: 'Dra Fernanda', specialty: 'Cirurgia Dentista' }
+]
+
+const timesShedule: Times[] = [
+  { id: 0, time: '08:00' }
 ]
 
 
+
+const schedule: Schedule[] = [
+  { id: 0, patient: patients[0].name, doctor: doctors[0].name, specialty: doctors[0].specialty, procedure: 'Extração', valor: '100', data: '20/08/2023', time: timesShedule[0].time }
+]
 
 
 
@@ -192,7 +204,7 @@ const times = [
 
 
 
-export { months, weeksDay, headersTableWorkspace, bodyTableWorkspace, times, patients, headersTableQuery, bodyTableQuery }
+export { months, weeksDay, headersTableWorkspace, bodyTableWorkspace, times, patients, headersTableQuery, bodyTableQuery, timesShedule, schedule, doctors }
 
 
 

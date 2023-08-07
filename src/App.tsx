@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 import { BuildingOfficeIcon, CalendarDaysIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline'
 import { Route, Routes } from 'react-router-dom'
 import { Query, Shedule, Workspace } from './pages'
-import { bodyTableQuery, bodyTableWorkspace, patients, times } from './constants'
+import { bodyTableQuery, bodyTableWorkspace, doctors, patients, schedule, times, timesShedule } from './constants'
 
 
 const routes = [
@@ -36,6 +36,25 @@ function App() {
   const [open, setOpen] = useState<boolean>(true)
 
   useEffect(() => {
+    const bdPatients = localStorage.getItem('bdPatients')
+    const bdDoctors = localStorage.getItem('bdDoctors')
+    const bdTimesShedule = localStorage.getItem('bdTimesShedule')
+    const bdShedule = localStorage.getItem('bdShedule')
+
+
+    if (!bdPatients) {
+      localStorage.setItem('bdPatients', JSON.stringify(patients))
+    }
+    if (!bdDoctors) {
+      localStorage.setItem('bdDoctors', JSON.stringify(doctors))
+    }
+    if (!bdTimesShedule) {
+      localStorage.setItem('bdTimesShedule', JSON.stringify(timesShedule))
+    }
+    if (!bdShedule) {
+      localStorage.setItem('bdShedule', JSON.stringify(schedule))
+    }
+
     const keyBodyTableWorkspace = localStorage.getItem('bodyTableWorkspace')
     const keyPatients = localStorage.getItem('patients')
     const keyTimes = localStorage.getItem('times')

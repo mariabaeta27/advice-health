@@ -53,3 +53,28 @@ export type BodyTableWorkspace = {
   local: string;
   priority: string;
 }
+
+
+export type Doctor = {
+  id: number;
+  name: string;
+  specialty: string;
+}
+
+export type Times = {
+  id: number;
+  time: string;
+}
+
+
+
+export type Schedule = {
+  id: number;
+  patient: string;
+  doctor: string;
+  specialty: string;
+  procedure: string;
+  valor: string;
+  data: string;
+  time: string;
+}
