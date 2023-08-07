@@ -51,8 +51,8 @@ const Navbar = ({ open, setOpen, routes }: {
     <div>
       <div className="chevron-double">
         {open
-          ? <ChevronDoubleRightIcon className="chevron-double-icon" onClick={() => setOpen(!open)} />
-          : <ChevronDoubleLeftIcon className="chevron-double-icon" onClick={() => setOpen(!open)} />}
+          ? <ChevronDoubleLeftIcon className="chevron-double-icon" onClick={() => setOpen(!open)} />
+          : <ChevronDoubleRightIcon className="chevron-double-icon" onClick={() => setOpen(!open)} />}
       </div>
       {
         open && (

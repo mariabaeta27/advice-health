@@ -50,7 +50,7 @@ function App() {
         </Col>
       </Row>
       <Row className='body'>
-        <Col md={1} className='navBar' style={{ width: open ? '40px' : '30px' }}>
+        <Col md={1} className='navBar' style={{ width: open ? '60px' : '30px' }}>
           <Navbar open={open} setOpen={setOpen} routes={routes} />
         </Col>
         <Col md={8} className='bg-sucess'>
