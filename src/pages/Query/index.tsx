@@ -23,7 +23,7 @@ const Query = () => {
     const newBody = bodyTableQuery.filter((b) => {
       if (advcancedFilter === undefined || advcancedFilter === 'patient') {
         if (b.name.includes(e)) {
-          console.log('AQUIIIII')
+
           return b
         }
       } else if (advcancedFilter === 'doctor') {
@@ -34,7 +34,7 @@ const Query = () => {
         return b
       }
     })
-    console.log(newBody)
+
     setNativeBody(newBody)
   }
 
@@ -42,10 +42,10 @@ const Query = () => {
   const body: any = []
 
   const handleChecked = (id: number) => {
-    console.log('aqui', id)
+
     const newBody = nativeBody?.map((item: any) => {
       if (item.id === id) {
-        console.log('aqui', id)
+
         return {
           ...item,
           status: !item?.status
@@ -54,7 +54,7 @@ const Query = () => {
         return { ...item }
       }
     })
-    console.log(newBody)
+
     setNativeBody(newBody)
   }
 

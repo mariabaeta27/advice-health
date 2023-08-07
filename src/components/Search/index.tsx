@@ -1,13 +1,25 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
+import { MagnifyingGlassIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import './Search.css'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-const Search = ({ onClick }: {
-  onClick: any
+const Search = ({ search: handleChecked, deleteSeach }: {
+  search: any,
+  deleteSeach: any
 }) => {
 
-  const [search, setSearch] = useState<string>()
+  const [search, setSearch] = useState<string>('')
+  const [showClearIcon, setShowClearIcon] = useState(false)
+
+  useEffect(() => {
+    if (search) {
+      handleChecked(search)
+      setShowClearIcon(true)
+    } else {
+      deleteSeach()
+      setShowClearIcon(false)
+    }
+  }, [search])
 
   return (
     <>
@@ -15,9 +27,24 @@ const Search = ({ onClick }: {
         type="text"
         className='input-card'
         placeholder='Buscar'
-        onChange={(e) => setSearch(e.target.value)}
+        onChange={(e) => {
+          setSearch(e.target.value)
+        }}
+        value={search}
       />
-      <MagnifyingGlassIcon className='icon-query' onClick={() => onClick(search)} />
+      {
+        !showClearIcon ? (
+          <MagnifyingGlassIcon className='icon-query' />
+        ) : (
+          <XMarkIcon className='icon-query'
+            onClick={() => {
+              setSearch('')
+              deleteSeach()
+              setShowClearIcon(false)
+            }}
+          />
+        )
+      }
     </>
   )
 };

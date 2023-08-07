@@ -29,7 +29,7 @@ const Shedule = () => {
   /* eslint-disable @typescript-eslint/no-explicit-any */
   const onSubmit = (form: any) => {
     form.preventDefault()
-    console.log(timeSelected)
+
     setLoading(true)
 
     const { name, cpf, bday, address, service, absent } = form.target;
@@ -65,12 +65,12 @@ const Shedule = () => {
     }
 
     debugger;
-    console.log(times)
+
 
 
     const newTimes = times.map((time) => {
       if (time.id === timeSelected?.id && !absent.checked) {
-        console.log(time)
+
         return {
           ...time,
           schedule: {
@@ -90,7 +90,7 @@ const Shedule = () => {
       }
     })
 
-    console.log('AQUI', newTimes)
+
 
 
     setControlerTimes(newTimes)

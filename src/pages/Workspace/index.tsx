@@ -21,12 +21,12 @@ const Workspace = () => {
   const cols = ['status', 'patitent', 'date', 'time', 'local', 'priority']
 
   const [nativeBody, setNativeBody] = useState<BodyTableWorkspace[]>()
+  const [filterBody, setFilterBody] = useState<BodyTableWorkspace[]>()
 
   const getData = () => {
     const bodyTable = localStorage.getItem('bodyTableWorkspace')
-    console.log(bodyTable)
-    console.log(bodyTable && JSON.parse(bodyTable))
     setNativeBody(bodyTable && JSON.parse(bodyTable))
+    setFilterBody(bodyTable && JSON.parse(bodyTable))
   }
 
   useEffect(() => {
@@ -52,7 +52,7 @@ const Workspace = () => {
   }
 
 
-  nativeBody?.map((item: any) => {
+  filterBody?.map((item: any) => {
     const data = {
       status: {
         children: <input type="checkbox" checked={item?.status} onChange={() => handleChecked(item?.id)} />
@@ -76,16 +76,24 @@ const Workspace = () => {
     body.push(data)
   })
 
-  const handleQuery = (value: string) => {
-    const newBody = nativeBody?.filter((item) => item.patient.includes(value) && item)
-    setNativeBody(newBody)
+  const search = (value: string) => {
+    // if (!value.length) {
+    //   setFilterBody(nativeBody)
+    // } else {
+    const newBody = nativeBody?.filter(({ patient }) => patient && patient.toLowerCase().includes(value.toLowerCase()))
+    setFilterBody(newBody)
+    // }
+  }
+
+  const deleteSeach = () => {
+    setFilterBody(nativeBody)
   }
 
   return (
     <div className='workspace'>
       <div className='workspace-primary'>
         <div>
-          <Search onClick={handleQuery} />
+          <Search search={search} deleteSeach={deleteSeach} />
         </div>
         <div className='dashboard'>
           <h2 className='dashboard-title'>Dashboad</h2>
