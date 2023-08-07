@@ -3,8 +3,9 @@ import { CalendarIcon, CheckCircleIcon } from '@heroicons/react/24/outline'
 import './Workspace.css'
 import { Card } from 'react-bootstrap'
 import { Calendar, Notifications, Search, Tables } from '../../components'
-import { bodyTableWorkspace, headersTableWorkspace } from '../../constants'
+import { headersTableWorkspace } from '../../constants'
 import { useEffect, useState } from 'react'
+import { BodyTableWorkspace } from '../../types'
 
 
 
@@ -19,20 +20,19 @@ const Workspace = () => {
 
   const cols = ['status', 'patitent', 'date', 'time', 'local', 'priority']
 
-  const [nativeBody, setNativeBody] = useState<Array<{
-    id: number;
-    status: boolean;
-    data: string;
-    time: string;
-    commitment: string;
-    patient: string;
-    local: string;
-    priority: string;
-  }>>()
+  const [nativeBody, setNativeBody] = useState<BodyTableWorkspace[]>()
+
+  const getData = () => {
+    const bodyTable = localStorage.getItem('bodyTableWorkspace')
+    console.log(bodyTable)
+    console.log(bodyTable && JSON.parse(bodyTable))
+    setNativeBody(bodyTable && JSON.parse(bodyTable))
+  }
 
   useEffect(() => {
-    setNativeBody(bodyTableWorkspace)
+    getData()
   }, [])
+
 
   const body: any = []
 
@@ -48,6 +48,7 @@ const Workspace = () => {
       }
     })
     setNativeBody(newBody)
+    localStorage.setItem('bodyTableWorkspace', JSON.stringify(newBody))
   }
 
 
@@ -76,7 +77,7 @@ const Workspace = () => {
   })
 
   const handleQuery = (value: string) => {
-    const newBody = bodyTableWorkspace.filter((item) => item.patient.includes(value) && item)
+    const newBody = nativeBody?.filter((item) => item.patient.includes(value) && item)
     setNativeBody(newBody)
   }
 
@@ -108,9 +109,11 @@ const Workspace = () => {
         </div>
         <div className='notice'>
           <h3 className='notice-title'>Avisos / Lembrentes</h3>
+          {/* {loading ? (<p>Loading...</p>) : ( */}
           <div>
             <Tables headers={headersTableWorkspace} bodyTable={body} columns={cols} />
           </div>
+          {/* )} */}
         </div>
       </div>
       <div>

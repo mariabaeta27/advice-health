@@ -1,10 +1,11 @@
 import './App.css'
 import { Col, Container, Row } from 'react-bootstrap'
 import { Header, Navbar } from './components'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { BuildingOfficeIcon, CalendarDaysIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline'
 import { Route, Routes } from 'react-router-dom'
 import { Query, Shedule, Workspace } from './pages'
+import { bodyTableWorkspace } from './constants'
 
 
 const routes = [
@@ -33,6 +34,13 @@ const routes = [
 
 function App() {
   const [open, setOpen] = useState<boolean>(true)
+
+  useEffect(() => {
+    const keyBodyTableWorkspace = localStorage.getItem('bodyTableWorkspace')
+    if (!keyBodyTableWorkspace) {
+      localStorage.setItem('bodyTableWorkspace', JSON.stringify(bodyTableWorkspace))
+    }
+  }, [])
 
   return (
     <Container fluid>

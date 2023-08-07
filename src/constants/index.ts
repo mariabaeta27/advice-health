@@ -186,6 +186,16 @@ const bodyTableWorkspace = [
     patient: 'Luiz Antonio',
     local: 'Consultório Av. Brail',
     priority: 'Alta'
+  },
+  {
+    id: 7,
+    status: false,
+    data: '29/10/2023',
+    time: '15:00h',
+    commitment: 'Paciente',
+    patient: 'Luiz Antonio',
+    local: 'Consultório Av. Brail',
+    priority: 'Alta'
   }
 ]
 

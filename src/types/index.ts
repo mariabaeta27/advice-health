@@ -41,3 +41,15 @@ export type Routes = {
   icon: JSX.Element;
   route: string;
 }
+
+
+export type BodyTableWorkspace = {
+  id: number;
+  status: boolean;
+  data: string;
+  time: string;
+  commitment: string;
+  patient: string;
+  local: string;
+  priority: string;
+}
