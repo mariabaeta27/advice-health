@@ -41,13 +41,13 @@ const Workspace = () => {
       if (item.id === id) {
         return {
           ...item,
-          status: !item?.statuss
+          status: !item?.status
         }
       } else {
         return { ...item }
       }
     })
-    body(newBody)
+    setNativeBody(newBody)
   }
 
 

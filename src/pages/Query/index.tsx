@@ -42,17 +42,20 @@ const Query = () => {
   const body: any = []
 
   const handleChecked = (id: number) => {
+    console.log('aqui', id)
     const newBody = nativeBody?.map((item: any) => {
       if (item.id === id) {
+        console.log('aqui', id)
         return {
           ...item,
-          status: !item?.statuss
+          status: !item?.status
         }
       } else {
         return { ...item }
       }
     })
-    body(newBody)
+    console.log(newBody)
+    setNativeBody(newBody)
   }
 
   nativeBody?.map((item: any) => {
