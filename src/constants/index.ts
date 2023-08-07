@@ -1,5 +1,12 @@
 import { Patient } from "../types"
 
+
+const patients: Patient[] = [
+  { id: 1, name: 'João da Mata', document: '000.000.000-00', bday: '28/06/1993', address: 'Rua 1' }
+  , { id: 0, name: 'Felipe Silva Rocha', document: '000.000.000-00', bday: '27/05/1993', address: 'Rua 2' }
+]
+
+
 const months = [
   {
     id: 0,
@@ -38,33 +45,118 @@ const headersTableWorkspace = [
       width: '10px'
     },
   },
-  { name: 'Data' },
-  { name: 'Horário' },
+  { name: 'Paciente' },
   {
-    name: 'Compromisso'
+    name: 'Data'
   },
   {
-    name: 'Paciente'
+    name: 'Horário'
   },
   {
     name: 'Local'
   },
   {
     name: 'Prioridade'
+  },
+
+]
+
+
+
+const headersTableQuery = [
+  {
+    name: 'Status',
+    styles: {
+      width: '10px'
+    },
+  },
+  { name: 'Paciente' },
+  { name: 'Dr(a)' },
+  {
+    name: 'Data'
+  },
+  {
+    name: 'Horário'
+  },
+  {
+    name: 'Local'
+  },
+  {
+    name: 'Prioridade'
+  },
+  {
+    name: ''
   }
 ]
 
-const bodyTableWorkspace = [
+
+const bodyTableQuery = [
+  {
+    id: 1,
+    status: false,
+    name: patients[0].name,
+    doctor: 'Dra. Fernanda',
+    date: '20/08/2023',
+    time: '08:00h',
+    priority: 'Alta'
+  },
   {
     id: 1,
     status: true,
-    data: '19/02/2023',
-    time: '16:00h',
-    commitment: 'Consulta Médica',
-    patient: '-',
-    local: 'Consultório Dra. Fernanda',
-    priority: 'Baixa'
+    name: 'Maria',
+    doctor: 'Dra. Fernanda',
+    date: '20/08/2023',
+    time: '08:00h',
+    priority: 'Alta'
   },
+  {
+    id: 1,
+    status: true,
+    name: patients[0].name,
+    doctor: 'Dra. Fernanda',
+    date: '20/08/2023',
+    time: '08:00h',
+    priority: 'Alta'
+  },
+  {
+    id: 1,
+    status: true,
+    name: patients[0].name,
+    doctor: 'Dra. Fernanda',
+    date: '20/08/2023',
+    time: '08:00h',
+    priority: 'Alta'
+  },
+  {
+    id: 1,
+    status: true,
+    name: patients[0].name,
+    doctor: 'Dra. Fernanda',
+    date: '20/08/2023',
+    time: '08:00h',
+    priority: 'Alta'
+  },
+  {
+    id: 1,
+    status: true,
+    name: patients[0].name,
+    doctor: 'Dra. Fernanda',
+    date: '20/08/2023',
+    time: '08:00h',
+    priority: 'Alta'
+  },
+  {
+    id: 1,
+    status: true,
+    name: patients[0].name,
+    doctor: 'Dra. Fernanda',
+    date: '20/08/2023',
+    time: '08:00h',
+    priority: 'Alta'
+  },
+]
+
+const bodyTableWorkspace = [
   {
     id: 2,
     status: true,
@@ -86,26 +178,6 @@ const bodyTableWorkspace = [
     priority: 'Média'
   },
   {
-    id: 4,
-    status: true,
-    data: '16/06/2023',
-    time: '08:00h',
-    commitment: 'Reunião',
-    patient: '-',
-    local: 'Consultorio Centro',
-    priority: 'Alta'
-  },
-  {
-    id: 5,
-    status: true,
-    data: '26/06/2023',
-    time: '17:00h',
-    commitment: 'Compromisso Pessoal',
-    patient: '-',
-    local: '-',
-    priority: 'Média'
-  },
-  {
     id: 6,
     status: false,
     data: '27/09/2023',
@@ -117,10 +189,6 @@ const bodyTableWorkspace = [
   }
 ]
 
-const patients: Patient[] = [
-  { id: 1, name: 'João da Mata', document: '000.000.000-00', bday: '28/06/1993', address: 'Rua 1' }
-  , { id: 0, name: 'Felipe Silva Rocha', document: '000.000.000-00', bday: '27/05/1993', address: 'Rua 2' }
-]
 
 const times = [
   { id: 0, time: '08:00', schedule: { title: `Paciente ${patients[0].name}`, subtext: 'Extração do dente 18, 28', patientId: patients[0].id }, block: false },
@@ -138,7 +206,7 @@ const times = [
 
 
 
-export { months, weeksDay, headersTableWorkspace, bodyTableWorkspace, times, patients }
+export { months, weeksDay, headersTableWorkspace, bodyTableWorkspace, times, patients, headersTableQuery, bodyTableQuery }
 
 
 

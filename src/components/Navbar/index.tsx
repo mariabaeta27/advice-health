@@ -2,16 +2,13 @@ import { ChevronDoubleLeftIcon, ChevronDoubleRightIcon } from "@heroicons/react/
 import './Navbar.css'
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
+import { Routes as RoutesTypes } from "../../types";
 
 
 const Navbar = ({ open, setOpen, routes }: {
   open: boolean,
   setOpen: React.Dispatch<React.SetStateAction<boolean>>,
-  routes: {
-    label: string;
-    icon: JSX.Element;
-    route: string;
-  }[]
+  routes: RoutesTypes[]
 
 }) => {
   const [selection, setSelection] = useState(routes[0])

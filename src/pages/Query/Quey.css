@@ -1,0 +1,25 @@
+.filters {
+  display: flex;
+  justify-content: space-between;
+  width: 700px;
+  align-items: end;
+}
+
+.advcanced-filters {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.advcanced-filters p {
+  color: #9b9b9b;
+  font-weight: 600;
+}
+
+.advcanced-filters div {
+  display: flex;
+  flex-direction: row;
+}
+
+.advcanced-filters p {
+  padding-top: 2px;
+}

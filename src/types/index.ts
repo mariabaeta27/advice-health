@@ -25,3 +25,19 @@ export type Notification = {
   icon?: any
 }
 
+export type HeadersTable = {
+  name: string;
+  styles: {
+    width: string;
+  };
+} | {
+  name: string;
+  styles?: undefined;
+}
+
+
+export type Routes = {
+  label: string;
+  icon: JSX.Element;
+  route: string;
+}
