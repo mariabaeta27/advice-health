@@ -15,12 +15,13 @@ const doctors: Doctor[] = [
 
 const timesSchedule: Times[] = [
   { id: 0, time: '08:00', absent: false },
+  { id: 8, time: '08:30', absent: false },
   { id: 1, time: '09:00', absent: false },
   { id: 2, time: '09:30', absent: false },
-  { id: 3, time: '10:00', absent: true },
+  { id: 3, time: '10:00', absent: false },
   { id: 4, time: '10:30', absent: false },
   { id: 5, time: '11:00', absent: true },
-  { id: 6, time: '11:30', absent: true },
+  { id: 6, time: '11:30', absent: false },
   { id: 7, time: '12:00', absent: false },
 ]
 
@@ -138,88 +139,9 @@ const headersTableQuery = [
 ]
 
 
-const bodyTableQuery = [
-  {
-    id: 0,
-    status: false,
-    name: patients[0].name,
-    doctor: 'Dra. Fernanda',
-    date: '20/08/2023',
-    time: '08:00h',
-    priority: 'Alta'
-  },
-  {
-    id: 1,
-    status: true,
-    name: 'Maria',
-    doctor: 'Dra. Fernanda',
-    date: '20/08/2023',
-    time: '10:00h',
-    priority: 'Alta'
-  },
-
-]
-
-const bodyTableWorkspace = [
-  {
-    id: 2,
-    status: true,
-    data: '21/02/2023',
-    time: '11:00h',
-    commitment: 'Paciente',
-    patient: 'Heloisa Baeta',
-    local: 'Consultório Centro',
-    priority: 'Alta'
-  },
-  {
-    id: 3,
-    status: true,
-    data: '08/04/2023',
-    time: '09:00h',
-    commitment: 'Paciente',
-    patient: 'Fernanda Lopes',
-    local: 'Consultório Rua da Bahia',
-    priority: 'Média'
-  },
-  {
-    id: 6,
-    status: false,
-    data: '27/09/2023',
-    time: '15:00h',
-    commitment: 'Paciente',
-    patient: 'Luiz Antonio',
-    local: 'Consultório Av. Brail',
-    priority: 'Alta'
-  },
-  {
-    id: 7,
-    status: false,
-    data: '29/10/2023',
-    time: '15:00h',
-    commitment: 'Paciente',
-    patient: 'Luiz Antonio',
-    local: 'Consultório Av. Brail',
-    priority: 'Alta'
-  }
-]
 
 
-const times = [
-  { id: 0, time: '08:00', schedule: { title: `${patients[0].name}`, subtext: 'Extração do dente 18, 28', patientId: patients[0].id }, block: false },
-  { id: 1, time: '08:30' },
-  { id: 2, time: '09:00', },
-  { id: 3, time: '09:30' },
-  { id: 5, time: '10:30' },
-  { id: 6, time: '11:00' },
-  { id: 7, time: '11:30', block: true },
-  { id: 8, time: '12:00', block: true }
-
-]
-
-
-
-
-export { months, weeksDay, headersTableWorkspace, bodyTableWorkspace, times, patients, headersTableQuery, bodyTableQuery, timesSchedule, schedule, doctors, notifications }
+export { months, weeksDay, headersTableWorkspace, patients, headersTableQuery, timesSchedule, schedule, doctors, notifications }
 
 
 

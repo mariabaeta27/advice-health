@@ -1,7 +1,10 @@
 .calendar {
   background-color: #7c7c7c;
-  width: 300px;
-  height: 300px;
+  width: 100px;
+  height: 80px;
+  border-collapse: separate;
+  border-spacing: 4px;
+  border-radius: 5px;
 }
 
 .header-calendar {
@@ -26,7 +29,7 @@
 .week-day {
   color: white;
   font-weight: 300;
-  padding: 10px;
+  padding: 8px;
 }
 
 

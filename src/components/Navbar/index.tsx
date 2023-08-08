@@ -1,7 +1,7 @@
 import { ChevronDoubleLeftIcon, ChevronDoubleRightIcon } from "@heroicons/react/24/outline"
 import './Navbar.css'
 import { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { Routes as RoutesTypes } from "../../types";
 
 
@@ -19,9 +19,12 @@ const Navbar = ({ open, setOpen, routes }: {
     route: string;
   }[]>()
 
+  const location = useLocation()
+
+
   useEffect(() => {
     const newRoutes = routes?.map((route) => {
-      if (route.label === selection.label) {
+      if (route.route === location.pathname) {
         return {
           ...route,
           selection: true
@@ -33,7 +36,7 @@ const Navbar = ({ open, setOpen, routes }: {
         }
       }
     })
-    setRoutesSelection(newRoutes)
+    newRoutes && setRoutesSelection(newRoutes)
 
   }, [selection, routes])
 

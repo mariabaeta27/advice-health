@@ -103,11 +103,10 @@ const AddShedule = ({ open, setOpen, onSubmit, time, patient, doctors }: {
               disabled={time?.absent}
               required
             />
-
-            <label>Doutor:</label>
-            <select id="dropdown" style={{ width: '150px', height: '20px', marginLeft: '5px' }} >
+            <label>Doutor(a):</label>
+            <select id="dropdown" style={{ width: '180px', height: '20px', marginLeft: '5px', marginBottom: '5px' }} >
               {doctors?.map((doctor) => (
-                <option key={doctor.id} value={doctor.name}>{doctor.name}</option>
+                <option key={doctor.id} value={doctor.name}>{doctor.name} {`(${doctor.specialty})`}</option>
               ))}
             </select>
 

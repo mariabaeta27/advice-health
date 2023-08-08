@@ -27,11 +27,10 @@ const Calendar = () => {
     }
   }
 
-
   return (
     <Container>
       <Row >
-        <div>
+        <div >
           <table className="calendar">
             <thead>
               <tr>
@@ -54,7 +53,7 @@ const Calendar = () => {
                 }
               </tr>
             </thead >
-            <tbody>
+            <tbody  >
               <tr>
                 <td />
                 <td />

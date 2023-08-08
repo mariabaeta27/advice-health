@@ -43,9 +43,6 @@ const Patient = ({ open, setOpen, query }: {
           return { ...item }
         }
       })
-      console.log(patient)
-      console.log(query)
-      console.log(newPatients)
       newPatients && localStorage.setItem('bdPatients', JSON.stringify(newPatients))
     }
 

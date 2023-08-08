@@ -129,7 +129,7 @@ const Query = () => {
   return (
     <>
       <div>
-        <div className="filters">
+        <div className="filters" style={{ marginLeft: '-9px', marginTop: '1px' }}>
           <div>
             <Search search={handleQuery} deleteSeach={deleteSeach} />
           </div>
@@ -151,7 +151,7 @@ const Query = () => {
             )}
           </div>
         </div>
-      </div>
+      </div >
       <div className='notice'>
         <div>
           <Tables headers={headersTableQuery} bodyTable={body} columns={cols} />

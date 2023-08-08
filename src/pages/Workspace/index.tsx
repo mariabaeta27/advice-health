@@ -28,6 +28,22 @@ const Workspace = () => {
     getData()
   }, [])
 
+  const handleChecked = (id: number) => {
+    const newBody = nativeBody?.map((item: any) => {
+      if (item.id === id) {
+        return {
+          ...item,
+          answered: !item?.answered
+        }
+      } else {
+        return { ...item }
+      }
+    })
+    setNativeBody(newBody)
+    setFilterBody(newBody)
+    localStorage.setItem('bdSchedule', JSON.stringify(newBody))
+  }
+
   const bodySeg: any = []
 
   filterBody?.map((item: any) => {
@@ -55,20 +71,7 @@ const Workspace = () => {
   })
 
 
-  const handleChecked = (id: number) => {
-    const newBody = nativeBody?.map((item: any) => {
-      if (item.id === id) {
-        return {
-          ...item,
-          status: !item?.status
-        }
-      } else {
-        return { ...item }
-      }
-    })
-    setNativeBody(newBody)
-    localStorage.setItem('bodyTableWorkspace', JSON.stringify(newBody))
-  }
+
 
   const search = (value: string) => {
     const newBody = nativeBody?.filter(({ patient }) => patient && patient.toLowerCase().includes(value.toLowerCase()))
