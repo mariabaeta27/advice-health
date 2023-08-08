@@ -3,14 +3,14 @@ import { Card, Dropdown } from 'react-bootstrap'
 import './Times.css'
 import { CalendarDaysIcon, PencilIcon, PlusCircleIcon, TrashIcon } from '@heroicons/react/20/solid'
 import { CheckCircleIcon, XCircleIcon } from '@heroicons/react/24/outline'
-import { Time } from '../../types'
+import { Time, TimeFormated } from '../../types'
 
 const Times = ({ time, addQuery, editQuery, deleteQuery, times, editTime }: {
-  time: Time,
-  addQuery: (time: Time) => void,
-  editQuery: (time: Time) => void,
-  deleteQuery: (time: Time) => void,
-  editTime: (newTime: string, time: Time) => void,
+  time: TimeFormated,
+  addQuery: (time: TimeFormated) => void,
+  editQuery: (time: TimeFormated) => void,
+  deleteQuery: (time: TimeFormated) => void,
+  editTime: (newTime: string, time: TimeFormated) => void,
   times: any;
 }) => {
 
@@ -21,7 +21,7 @@ const Times = ({ time, addQuery, editQuery, deleteQuery, times, editTime }: {
           <p>{time?.time}</p>
         </div>
         <div className='time-body'>
-          {time.schedule && (
+          {time?.schedule && (
             <>
               <div>
                 <Card className={'time-card'}>
@@ -30,15 +30,15 @@ const Times = ({ time, addQuery, editQuery, deleteQuery, times, editTime }: {
               </div>
               <div className="notifications-text">
                 <div>
-                  <h4 style={{ color: '#4f4d4d' }}>{time?.schedule?.title}</h4>
+                  <h4 style={{ color: '#4f4d4d' }}>{time?.schedule?.patient}</h4>
                 </div>
                 <div>
-                  <h5 style={{ color: '#9b9b9b' }}>{time?.schedule?.subtext}</h5>
+                  <h5 style={{ color: '#9b9b9b' }}>{time?.schedule?.procedure}</h5>
                 </div>
               </div>
             </>
           )}
-          {time.block && (
+          {time?.absent && (
             <>
               <div>
                 <Card className={'time-card'}>
@@ -55,7 +55,7 @@ const Times = ({ time, addQuery, editQuery, deleteQuery, times, editTime }: {
         </div>
 
         {
-          !time?.block ? (
+          !time?.absent ? (
             <div className='time-icons'>
               {time.schedule ? (
                 <div className='time-icons'>
@@ -64,7 +64,6 @@ const Times = ({ time, addQuery, editQuery, deleteQuery, times, editTime }: {
                       <CalendarDaysIcon className='time-icon' />
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
-
                       {times?.map((t: Time) => (
                         <Dropdown.Item
                           key={t.id}

@@ -1,44 +1,73 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Shedule.css'
-import { UserCircleIcon } from '@heroicons/react/24/outline'
-import { Calendar, AddShedule, Notifications, Times } from '../../components'
+import { Calendar, AddShedule, Times, DoctorCard } from '../../components'
 
 import { useEffect, useState } from 'react'
-import { Patient, Time } from '../../types'
+import { Doctor, Patient, Schedule, TimeFormated, Times as Timestypes } from '../../types'
 
-
-const notificationsShedule = [
-  { id: 1, text: 'Dr. Felipe Baeta', subText: 'Ortodontista', icon: <UserCircleIcon /> },
-  { id: 2, text: 'Dra. Gabrielly', subText: 'Odontopediatra', icon: <UserCircleIcon /> },
-  { id: 3, text: 'Ana Baeta', subText: 'Cirurgia Dentista', icon: <UserCircleIcon /> }
-]
 
 const Shedule = () => {
   const [open, setOpen] = useState(false)
-  const [contolerTimes, setControlerTimes] = useState<Time[]>()
-  const [timeSelected, setTimeSelected] = useState<Time | undefined>()
+  const [contolerTimes, setControlerTimes] = useState<TimeFormated[] | undefined>()
+  const [timeSelected, setTimeSelected] = useState<TimeFormated>()
   const [patientEdit, setPatientEdit] = useState<Patient | undefined>()
-  const [timesAvailable, setTimesAvailable] = useState<Time | undefined>()
-
-
+  const [timesAvailable, setTimesAvailable] = useState<Timestypes[] | undefined>()
   const [patientsFormated, setPatientsFormated] = useState<Patient[] | undefined>()
+  const [doctors, setDoctors] = useState<Doctor[]>()
 
+  const timesAvailableFunc = (times: Timestypes[] | undefined, shedule: Schedule[] | undefined) => {
 
+    const newTimes = times?.filter((t) => !t.absent)
+    const differentValues = newTimes?.filter(item1 => {
+      const matchingItem = shedule?.find(item2 => item2.time === item1.time);
+      return !matchingItem;
+    });
+
+    if (differentValues) {
+      setTimesAvailable(differentValues)
+    }
+
+  }
   const getData = () => {
-    const times = localStorage.getItem('times')
-    const patients = localStorage.getItem('patients')
-    const availableTimes = times && JSON.parse(times)?.filter((t: Time) => !t.block && t.schedule === undefined)
+    const bdTimesSchedule = localStorage.getItem('bdTimesSchedule')
+    const bdPatients = localStorage.getItem('bdPatients')
+    const bdSchedule = localStorage.getItem('bdSchedule')
+    const bdDoctors = localStorage.getItem('bdDoctors')
+    const times = bdTimesSchedule && JSON.parse(bdTimesSchedule)
+    const patients = bdPatients && JSON.parse(bdPatients)
+    const schedule = bdSchedule && JSON.parse(bdSchedule)?.filter((item: Schedule) => item.status)
+    const doctors = bdDoctors && JSON.parse(bdDoctors)
 
-    setControlerTimes(times && JSON.parse(times))
-    setPatientsFormated(patients && JSON.parse(patients))
-    setTimesAvailable(availableTimes)
+    if (schedule && times) {
+      timesAvailableFunc(times, schedule)
+    }
+    const timesFormated: TimeFormated[] = times?.map((t: Timestypes) => {
+      return {
+        ...t,
+        schedule: schedule?.map((s: Schedule) => {
+          if (s.time === t.time) {
+            return s
+          }
+        })[0]
+      }
+    })
+
+    setDoctors(doctors)
+    setControlerTimes(timesFormated)
+    setPatientsFormated(patients)
   }
 
   useEffect(() => {
     getData()
   }, [])
+
+
+
+
+
 
 
   const postPatient = ({ name, cpf, bday, address }: any) => {
@@ -110,20 +139,20 @@ const Shedule = () => {
     setOpen(false)
   }
 
-  const addQuery = (time: Time) => {
+  const addQuery = (time: TimeFormated) => {
     setOpen(true);
     setTimeSelected(time)
     setPatientEdit(undefined)
   }
 
-  const editQuery = (time: Time) => {
+  const editQuery = (time: TimeFormated) => {
     setTimeSelected(time)
     const newPatient = patientsFormated?.filter((p) => p.id === time?.schedule?.patientId)
     setPatientEdit(newPatient && newPatient[0])
     setOpen(true);
   }
 
-  const deleteQuery = (time: Time) => {
+  const deleteQuery = (time: TimeFormated) => {
     const newTimes = contolerTimes?.map((t) => {
       if (t.id === time.id) {
         return {
@@ -136,18 +165,34 @@ const Shedule = () => {
         }
       }
     })
+    const bdSchedule = localStorage.getItem('bdSchedule')
+    if (bdSchedule) {
+      const newShedule = JSON.parse(bdSchedule)?.map((item: Schedule) => {
+        if (item.id === time?.schedule?.id) {
+          return {
+            ...item,
+            status: false
+          }
+        } else {
+          return item
+        }
+      })
+
+      localStorage.setItem('bdSchedule', JSON.stringify(newShedule))
+    }
     setControlerTimes(newTimes)
-    localStorage.setItem('times', JSON.stringify(newTimes))
   }
 
-
-
-  const editTime = (newTime: string, time: Time) => {
+  const editTime = (newTime: string, time: TimeFormated) => {
     const newTimes = contolerTimes?.map((t) => {
       if (t.time === newTime) {
         return {
           ...time,
-          time: newTime
+          time: newTime,
+          schedule: {
+            ...time.schedule,
+            time: newTime
+          }
         }
       } else if (t.time === time.time) {
         return {
@@ -158,8 +203,26 @@ const Shedule = () => {
         return t
       }
     })
+
+    const bdSchedule = localStorage.getItem('bdSchedule')
+    const bdTimesSchedule = localStorage.getItem('bdTimesSchedule')
+
+    if (bdSchedule && bdTimesSchedule) {
+      const newShedule = JSON.parse(bdSchedule)?.map((item: Schedule) => {
+        if (item.id === time?.schedule?.id) {
+          return {
+            ...item,
+            time: newTime
+          }
+        } else {
+          return item
+        }
+      })
+      console.log(newShedule)
+      localStorage.setItem('bdSchedule', JSON.stringify(newShedule))
+      timesAvailableFunc(JSON.parse(bdTimesSchedule), newShedule)
+    }
     setControlerTimes(newTimes)
-    localStorage.setItem('times', JSON.stringify(newTimes))
   }
 
 
@@ -170,7 +233,9 @@ const Shedule = () => {
       <div className='shedule'>
         <div className='shedule-primary'>
           <h2 className='shedule-title'>Medicos</h2>
-          <Notifications notifications={notificationsShedule} />
+          {
+            doctors?.map((doctor) => <DoctorCard doctor={doctor} />)
+          }
           <div style={{ marginTop: '10px' }}>
             <Calendar />
           </div>

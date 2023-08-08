@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 import { BuildingOfficeIcon, CalendarDaysIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline'
 import { Route, Routes } from 'react-router-dom'
 import { Query, Shedule, Workspace } from './pages'
-import { bodyTableQuery, bodyTableWorkspace, doctors, notifications, patients, schedule, times, timesShedule } from './constants'
+import { bodyTableQuery, bodyTableWorkspace, doctors, notifications, patients, schedule, times, timesSchedule } from './constants'
 
 
 const routes = [
@@ -38,8 +38,8 @@ function App() {
   useEffect(() => {
     const bdPatients = localStorage.getItem('bdPatients')
     const bdDoctors = localStorage.getItem('bdDoctors')
-    const bdTimesShedule = localStorage.getItem('bdTimesShedule')
-    const bdShedule = localStorage.getItem('bdShedule')
+    const bdTimesSchedule = localStorage.getItem('bdTimesSchedule')
+    const bdSchedule = localStorage.getItem('bdSchedule')
     const bdNotifications = localStorage.getItem('bdNotifications')
 
 
@@ -49,11 +49,11 @@ function App() {
     if (!bdDoctors) {
       localStorage.setItem('bdDoctors', JSON.stringify(doctors))
     }
-    if (!bdTimesShedule) {
-      localStorage.setItem('bdTimesShedule', JSON.stringify(timesShedule))
+    if (!bdTimesSchedule) {
+      localStorage.setItem('bdTimesSchedule', JSON.stringify(timesSchedule))
     }
-    if (!bdShedule) {
-      localStorage.setItem('bdShedule', JSON.stringify(schedule))
+    if (!bdSchedule) {
+      localStorage.setItem('bdSchedule', JSON.stringify(schedule))
     }
     if (!bdNotifications) {
       localStorage.setItem('bdNotifications', JSON.stringify(notifications))

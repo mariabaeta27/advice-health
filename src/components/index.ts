@@ -6,6 +6,7 @@ import Notifications from './Notifications'
 import Times from "./Times";
 import AddShedule from "./AddShedule";
 import Search from './Search'
+import DoctorCard from "./Doctors";
 
 
-export { Header, Navbar, Tables, Calendar, Notifications, Times, AddShedule, Search }
+export { Header, Navbar, Tables, Calendar, Notifications, Times, AddShedule, Search, DoctorCard }

@@ -64,6 +64,7 @@ export type Doctor = {
 export type Times = {
   id: number;
   time: string;
+  absent: boolean;
 }
 
 
@@ -77,7 +78,9 @@ export type Schedule = {
   value: string;
   date: string;
   time: string;
-  answered: boolean
+  answered: boolean,
+  patientId: number,
+  status: boolean
 }
 
 
@@ -90,4 +93,11 @@ export type NotificationNew = {
     value: string;
     dateSheduled: string;
   }[];
+}
+
+export type TimeFormated = {
+  id: number;
+  time: string;
+  absent: boolean;
+  schedule: Schedule | undefined;
 }

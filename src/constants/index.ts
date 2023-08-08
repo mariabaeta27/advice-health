@@ -8,14 +8,21 @@ const doctors: Doctor[] = [
   { id: 0, name: 'Dra Fernanda', specialty: 'Cirurgia Dentista' }
 ]
 
-const timesShedule: Times[] = [
-  { id: 0, time: '08:00' }
+const timesSchedule: Times[] = [
+  { id: 0, time: '08:00', absent: false },
+  { id: 1, time: '09:00', absent: true },
+  { id: 2, time: '09:30', absent: false },
+  { id: 3, time: '10:00', absent: true },
+  { id: 4, time: '10:30', absent: true },
+  { id: 5, time: '11:00', absent: true },
+  { id: 6, time: '11:30', absent: true },
+  { id: 7, time: '12:00', absent: false },
 ]
 
 
 
 const schedule: Schedule[] = [
-  { id: 0, patient: patients[0].name, doctor: doctors[0].name, specialty: doctors[0].specialty, procedure: 'Extração', value: '100', date: '20/08/2023', time: timesShedule[0].time, answered: true }
+  { id: 0, patientId: patients[0].id, patient: patients[0].name, doctor: doctors[0].name, specialty: doctors[0].specialty, procedure: 'Extração', value: '100', date: '20/08/2023', time: timesSchedule[0].time, answered: true, status: true }
 ]
 
 const notifications: NotificationNew[] = [
@@ -38,16 +45,6 @@ const notifications: NotificationNew[] = [
     ]
   }
 ]
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -211,7 +208,7 @@ const times = [
 
 
 
-export { months, weeksDay, headersTableWorkspace, bodyTableWorkspace, times, patients, headersTableQuery, bodyTableQuery, timesShedule, schedule, doctors, notifications }
+export { months, weeksDay, headersTableWorkspace, bodyTableWorkspace, times, patients, headersTableQuery, bodyTableQuery, timesSchedule, schedule, doctors, notifications }
 
 
 
