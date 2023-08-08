@@ -33,7 +33,6 @@ const Query = () => {
     const newBody = nativeBody.filter((b: any) => {
       if (!advcancedFilter || advcancedFilter === 'patient') {
         if (b.patient.toLowerCase().includes(e)) {
-          console.log('aqui', b)
           return b
         }
       } else if (advcancedFilter === 'procedure') {
@@ -54,14 +53,15 @@ const Query = () => {
       if (item.id === id) {
         return {
           ...item,
-          status: !item?.status
+          answered: !item?.answered
         }
       } else {
         return { ...item }
       }
     })
     setNativeBody(newBody)
-    localStorage.setItem('bodyTableQuery', JSON.stringify(newBody))
+    setFilterBody(newBody)
+    localStorage.setItem('bdSchedule', JSON.stringify(newBody))
   }
 
   filterBody?.map((item: Schedule) => {
