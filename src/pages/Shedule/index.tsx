@@ -38,8 +38,9 @@ const Shedule = () => {
     const bdDoctors = localStorage.getItem('bdDoctors')
     const times = bdTimesSchedule && JSON.parse(bdTimesSchedule)
     const patients = bdPatients && JSON.parse(bdPatients)
-    const schedule = bdSchedule && JSON.parse(bdSchedule)?.filter((item: Schedule) => item.status)
+    const schedule = bdSchedule && JSON.parse(bdSchedule)?.filter((item: Schedule) => !item.canceled)
     const doctors = bdDoctors && JSON.parse(bdDoctors)
+
 
     if (schedule && times) {
       timesAvailableFunc(times, schedule)
@@ -64,12 +65,6 @@ const Shedule = () => {
     getData()
   }, [])
 
-
-
-
-
-
-
   const postPatient = ({ name, cpf, bday, address }: any) => {
     if (patientEdit) {
       const newPatients = patientsFormated?.map((p) => {
@@ -88,55 +83,104 @@ const Shedule = () => {
         }
       })
       setPatientsFormated(newPatients)
-      localStorage.setItem('patients', JSON.stringify(newPatients))
+      localStorage.setItem('bdPatients', JSON.stringify(newPatients))
+
     } else {
       const newPatients = patientsFormated && [...patientsFormated, {
-        id: patientsFormated?.length,
+        id: Math.random() * (50 - 10) + 10,
         name: name?.value,
         document: cpf?.value,
         bday: bday?.value,
         address: address?.value,
       }]
       setPatientsFormated(newPatients)
-      localStorage.setItem('patients', JSON.stringify(newPatients))
+      localStorage.setItem('bdPatients', JSON.stringify(newPatients))
+
     }
   }
 
   const onSubmit = (form: any) => {
     form.preventDefault()
+    const { name, service, absent, value, dropdown } = form.target;
 
-    const { name, service, absent } = form.target;
-
-
-    if (!absent.checked && !patientEdit) {
+    if (!absent.checked) {
       postPatient(form.target)
     }
 
-    const newTimes = contolerTimes?.map((time) => {
-      if (time.id === timeSelected?.id && !absent.checked) {
+    const newTimes: any = contolerTimes?.map((item) => {
+      if (item.id === timeSelected?.id && !absent.checked) {
         return {
-          ...time,
-          schedule: name?.value && service?.value && patientsFormated?.length ? {
-            title: name?.value,
-            subtext: service?.value,
-            patientId: patientEdit ? patientEdit?.id : patientsFormated?.length,
-          } : undefined,
-          block: absent?.checked
+          ...item,
+          absent: false,
+          schedule: (name?.value && dropdown?.value, service?.value, value?.value) ? {
+            ...item.schedule,
+            id: patientEdit ? item?.id : Math.random() * (50 - 10) + 10,
+            patientId: patientEdit ? patientEdit?.id : patientsFormated && patientsFormated[patientsFormated?.length - 1].id,
+            answered: false,
+            date: '20/08/2023',
+            doctor: dropdown?.value,
+            patient: name?.value,
+            procedure: service?.value,
+            time: timeSelected?.time,
+            value: value?.value,
+            canceled: false,
+          } : undefined
         }
-      } else if (time.id === timeSelected?.id && absent.checked) {
+      } else if (item.id === timeSelected?.id && absent.checked) {
         return {
-          ...time,
-          schedule: undefined,
-          block: absent?.checked,
+          ...item,
+          absent: absent?.checked,
+          schedule: undefined
         }
       } else {
-        return time
+        return {
+          ...item
+        }
       }
+
+
     })
 
-    setControlerTimes(newTimes)
-    localStorage.setItem('times', JSON.stringify(newTimes))
-    setOpen(false)
+    const newShedule = newTimes.map((item: TimeFormated) => item?.schedule)
+      ?.filter((item: Schedule) => item)
+
+
+    const bdSchedule = localStorage.getItem('bdSchedule')
+
+
+    if (bdSchedule) {
+      const sheduleSFormated = JSON.parse(bdSchedule)?.map((item: any) => {
+        return newShedule.map((i: any) => {
+          if (i.id === item.id) {
+            return { ...i }
+          } else {
+            return {
+              ...i
+            }
+          }
+        })
+      })
+
+      console.log(sheduleSFormated)
+
+
+
+      if (sheduleSFormated) {
+        localStorage.setItem('bdSchedule', JSON.stringify(sheduleSFormated))
+      }
+    }
+
+
+    if (newTimes) {
+      setControlerTimes(newTimes)
+    }
+
+
+    newTimes.map((item: TimeFormated) => delete item.schedule)
+    console.log(newTimes)
+    localStorage.setItem('bdTimesSchedule', JSON.stringify(newTimes))
+
+
   }
 
   const addQuery = (time: TimeFormated) => {
@@ -171,7 +215,7 @@ const Shedule = () => {
         if (item.id === time?.schedule?.id) {
           return {
             ...item,
-            status: false
+            canceled: true
           }
         } else {
           return item
@@ -181,10 +225,11 @@ const Shedule = () => {
       localStorage.setItem('bdSchedule', JSON.stringify(newShedule))
     }
     setControlerTimes(newTimes)
+
   }
 
   const editTime = (newTime: string, time: TimeFormated) => {
-    const newTimes = contolerTimes?.map((t) => {
+    const newTimes: any = contolerTimes?.map((t) => {
       if (t.time === newTime) {
         return {
           ...time,
@@ -218,7 +263,6 @@ const Shedule = () => {
           return item
         }
       })
-      console.log(newShedule)
       localStorage.setItem('bdSchedule', JSON.stringify(newShedule))
       timesAvailableFunc(JSON.parse(bdTimesSchedule), newShedule)
     }
@@ -248,7 +292,7 @@ const Shedule = () => {
             </div>)}
         </div>
       </div>
-      <AddShedule open={open} setOpen={setOpen} onSubmit={onSubmit} time={timeSelected} patient={patientEdit} />
+      <AddShedule open={open} setOpen={setOpen} onSubmit={onSubmit} time={timeSelected} patient={patientEdit} doctors={doctors} />
 
     </>
   )

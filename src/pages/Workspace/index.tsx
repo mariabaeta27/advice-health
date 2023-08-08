@@ -17,7 +17,7 @@ const Workspace = () => {
   const [notificantons, setNotificantons] = useState<NotificationNew[]>()
 
   const getData = () => {
-    const bodyTable = localStorage.getItem('bdShedule')
+    const bodyTable = localStorage.getItem('bdSchedule')
     setNativeBody(bodyTable && JSON.parse(bodyTable))
     setFilterBody(bodyTable && JSON.parse(bodyTable))
     const bdNotifications = localStorage.getItem('bdNotifications')
@@ -28,9 +28,7 @@ const Workspace = () => {
     getData()
   }, [])
 
-
   const bodySeg: any = []
-
 
   filterBody?.map((item: any) => {
     const data = {
@@ -57,11 +55,6 @@ const Workspace = () => {
   })
 
 
-
-
-
-  const body: any = []
-
   const handleChecked = (id: number) => {
     const newBody = nativeBody?.map((item: any) => {
       if (item.id === id) {
@@ -76,31 +69,6 @@ const Workspace = () => {
     setNativeBody(newBody)
     localStorage.setItem('bodyTableWorkspace', JSON.stringify(newBody))
   }
-
-
-  filterBody?.map((item: any) => {
-    const data = {
-      status: {
-        children: <input type="checkbox" checked={item?.status} onChange={() => handleChecked(item?.id)} />
-      },
-      patitent: {
-        children: item?.patient
-      },
-      date: {
-        children: item.data
-      },
-      time: {
-        children: item.time
-      },
-      local: {
-        children: 'Consultório Principal'
-      },
-      priority: {
-        children: item.priority
-      }
-    }
-    body.push(data)
-  })
 
   const search = (value: string) => {
     const newBody = nativeBody?.filter(({ patient }) => patient && patient.toLowerCase().includes(value.toLowerCase()))

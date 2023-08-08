@@ -1,14 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import './Quey.css'
-import { Search, Tables } from "../../components"
+import { Patient, QueryComponent, Search, Tables } from "../../components"
 import { headersTableQuery } from "../../constants"
 import { useEffect, useState } from "react"
 import { FunnelIcon, MagnifyingGlassIcon, PencilIcon } from '@heroicons/react/20/solid'
-import User from '../../components/Patient'
+
+import { Schedule } from '../../types'
 
 const Query = () => {
 
-  const cols = ['status', 'patitent', 'date', 'time', 'value', 'procedure', 'icon']
+  const cols = ['status', 'patitent', 'date', 'time', 'doctor', 'value', 'procedure', 'icon']
 
 
   const [nativeBody, setNativeBody] = useState<any>()
@@ -16,13 +17,15 @@ const Query = () => {
   const [viewFilters, setViewFilters] = useState(false)
   const [advcancedFilter, setAdvcancedFilter] = useState<string | undefined>()
   const [open, setOpen] = useState(false)
+  const [openQuery, setOpenQuery] = useState(false)
+  const [query, setQuey] = useState<Schedule | undefined>()
 
 
 
   const getData = () => {
-    const keyBodyTableQuery = localStorage.getItem('times')
-    setNativeBody(keyBodyTableQuery && JSON.parse(keyBodyTableQuery))
-    setFilterBody(keyBodyTableQuery && JSON.parse(keyBodyTableQuery))
+    const bdSchedule = localStorage.getItem('bdSchedule')
+    setNativeBody(bdSchedule && JSON.parse(bdSchedule))
+    setFilterBody(bdSchedule && JSON.parse(bdSchedule))
   }
 
 
@@ -70,32 +73,56 @@ const Query = () => {
     localStorage.setItem('bodyTableQuery', JSON.stringify(newBody))
   }
 
-  filterBody?.map((item: any) => {
+  filterBody?.map((item: Schedule) => {
     const data = {
       status: {
-        children: <input type="checkbox" checked={item?.status} onChange={() => handleChecked(item?.id)} />
+        children: <input type="checkbox" checked={item?.answered} onChange={() => handleChecked(item?.id)} />
       },
       patitent: {
-        children: item.schedule?.title
+        children: item.patient
       },
 
       date: {
-        children: '20/08/2023'
+        children: item.date
       },
       time: {
         children: item.time
+      },
+      doctor: {
+        children: item.doctor
       },
       value: {
         children: item.value ? `R$ ${item.value}` : 'R$100,00'
       },
       procedure: {
-        children: 'Extração'
+        children: item.procedure
       },
       icon: {
         children: (
           <div style={{ display: 'flex' }}>
-            <PencilIcon className='time-icon' onClick={() => setOpen(true)} />
-            <MagnifyingGlassIcon className='time-icon' onClick={() => setOpen(true)} />
+            <div>
+              <PencilIcon
+                className='time-icon'
+                onClick={() => {
+                  setQuey(item);
+                  setOpen(true)
+                }}
+                data-toggle="tooltip"
+                data-placement="right"
+                title="Editar Paciente"
+              />
+            </div>
+            <div>
+              <MagnifyingGlassIcon
+                className='time-icon'
+                onClick={() => {
+                  setQuey(item)
+                  setOpenQuery(true)
+                }}
+                data-toggle="tooltip"
+                data-placement="right"
+                title="Editar Consulta" />
+            </div>
           </div>
         )
       }
@@ -141,8 +168,8 @@ const Query = () => {
         </div>
       </div>
 
-      <User open={open} setOpen={setOpen} />
-
+      <Patient open={open} setOpen={setOpen} query={query} />
+      <QueryComponent open={openQuery} setOpen={setOpenQuery} query={query} />
     </>
   )
 }

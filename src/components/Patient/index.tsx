@@ -1,13 +1,75 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Offcanvas from "react-bootstrap/esm/Offcanvas";
+import { Patient, Schedule } from "../../types";
+import { useEffect, useState } from "react";
 
 
-const User = ({ open, setOpen }: {
+const Patient = ({ open, setOpen, query }: {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>,
-  /* eslint-disable @typescript-eslint/no-explicit-any */
+  query: Schedule | undefined
 
 }) => {
 
+  const [patient, setPatient] = useState<Patient | undefined>()
+
+  useEffect(() => {
+    const bdPatients = localStorage.getItem('bdPatients')
+
+    if (bdPatients) {
+      const newPatient = JSON.parse(bdPatients)?.filter((item: Patient) => item.id == query?.patientId)
+      setPatient(newPatient[0])
+    }
+  }, [query])
+
+  const onSubmit = (form: any) => {
+    const bdSchedule = localStorage.getItem('bdSchedule')
+
+
+    form.preventDefault()
+    const [name, bday, address, document] = form.target
+
+    const bdPatients = localStorage.getItem('bdPatients')
+
+    if (bdPatients) {
+      const newPatients = JSON.parse(bdPatients)?.map((item: Patient) => {
+        if (item.id === patient?.id) {
+          return {
+            ...item,
+            name: name.value,
+            bday: bday.value,
+            document: document.value,
+            address: address.value
+          }
+        } else {
+          return item
+        }
+      })
+      localStorage.setItem('bdPatients', JSON.stringify(newPatients))
+    }
+
+
+
+
+    if (bdSchedule) {
+      const newSchedule = JSON.parse(bdSchedule)?.map((item: Patient) => {
+        if (item.id === query?.id) {
+          return {
+            ...item,
+            name: name.value
+          }
+        } else {
+          return item
+        }
+      })
+
+      localStorage.setItem('bdSchedule', JSON.stringify(newSchedule))
+      const newPatient = newSchedule?.filter((item: Patient) => item.id == query?.patientId)
+
+      setPatient(newPatient[0])
+    }
+
+  }
 
   return (
     <Offcanvas show={open} onHide={() => {
@@ -15,20 +77,11 @@ const User = ({ open, setOpen }: {
 
     }} placement="end">
       <Offcanvas.Header closeButton>
-        <Offcanvas.Title className="title-off-canvas">Em implementação</Offcanvas.Title>
+        <Offcanvas.Title className="title-off-canvas">Paciente</Offcanvas.Title>
       </Offcanvas.Header>
-      {/* <Offcanvas.Body>
+      <Offcanvas.Body>
         <form onSubmit={onSubmit}>
-          <div className="absent">
-            <input
-              type='checkbox'
-              onChange={() => setAbsent(!absent)}
-              name="absent"
-              defaultChecked={time?.block}
-            />
-            <label className="absent-input">Ausente</label>
-          </div>
-          {(!absent && !time?.block) && (<>
+          <>
             <label>Nome completo</label>
             <input
               type="text"
@@ -36,8 +89,6 @@ const User = ({ open, setOpen }: {
               className="input-form"
               name="name"
               defaultValue={patient?.name}
-              disabled={time?.block || absent}
-              required
             />
             <div className="personl-data">
               <div>
@@ -48,7 +99,6 @@ const User = ({ open, setOpen }: {
                   className="input-form"
                   name="cpf"
                   defaultValue={patient?.document}
-                  disabled={time?.block}
                   required
                 />
               </div>
@@ -60,7 +110,6 @@ const User = ({ open, setOpen }: {
                   className="input-form"
                   name="bday"
                   defaultValue={patient?.bday}
-                  disabled={time?.block}
                   required
                 />
               </div>
@@ -72,35 +121,13 @@ const User = ({ open, setOpen }: {
               className="input-form"
               name="address"
               defaultValue={patient?.address}
-              disabled={time?.block}
-              required
             />
-            <label>Procedimento</label>
-            <input
-              type="text"
-              placeholder="Procedimento"
-              className="input-form"
-              name="service"
-              defaultValue={time?.schedule?.subtext}
-              disabled={time?.block}
-              required
-            />
-          </>)}
+          </>
           <input type="submit" className="button-form" />
         </form>
-        {
-          (!absent && !time?.block && !time?.schedule) && (
-            <p className="value">
-              <span>
-                Valor Pago:
-              </span>
-              R$100,00
-            </p>
-          )
-        }
-      </Offcanvas.Body> */}
+      </Offcanvas.Body>
     </Offcanvas >
   )
 }
 
-export default User;
+export default Patient;

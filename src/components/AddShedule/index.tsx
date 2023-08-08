@@ -1,27 +1,27 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Offcanvas from "react-bootstrap/esm/Offcanvas";
 import './AddShedule.css'
 import { useEffect, useState } from "react";
-import { Patient, Time } from "../../types";
+import { Doctor, Patient, TimeFormated } from "../../types";
 
 
-const AddShedule = ({ open, setOpen, onSubmit, time, patient }: {
+const AddShedule = ({ open, setOpen, onSubmit, time, patient, doctors }: {
   open: boolean;
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>,
-  /* eslint-disable @typescript-eslint/no-explicit-any */
-  onSubmit: any
-  time: Time | undefined,
-  patient: Patient | undefined
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  onSubmit: any;
+  time: TimeFormated | undefined;
+  patient: Patient | undefined;
+  doctors: Doctor[] | undefined;
 }) => {
   const [absent, setAbsent] = useState(false)
-
 
   useEffect(() => {
     setAbsent(false)
   }, [])
 
   useEffect(() => {
-    if (time?.block) {
-      setAbsent(time.block)
+    if (time?.absent) {
+      setAbsent(time.absent)
     } else {
       setAbsent(false)
     }
@@ -42,11 +42,11 @@ const AddShedule = ({ open, setOpen, onSubmit, time, patient }: {
               type='checkbox'
               onChange={() => setAbsent(!absent)}
               name="absent"
-              defaultChecked={time?.block}
+              defaultChecked={absent || time?.absent}
             />
             <label className="absent-input">Ausente</label>
           </div>
-          {(!absent && !time?.block) && (<>
+          {(!absent && !time?.absent) && (<>
             <label>Nome completo</label>
             <input
               type="text"
@@ -54,7 +54,7 @@ const AddShedule = ({ open, setOpen, onSubmit, time, patient }: {
               className="input-form"
               name="name"
               defaultValue={patient?.name}
-              disabled={time?.block || absent}
+              disabled={time?.absent || absent}
               required
             />
             <div className="personl-data">
@@ -66,7 +66,7 @@ const AddShedule = ({ open, setOpen, onSubmit, time, patient }: {
                   className="input-form"
                   name="cpf"
                   defaultValue={patient?.document}
-                  disabled={time?.block}
+                  disabled={time?.absent}
                   required
                 />
               </div>
@@ -78,7 +78,7 @@ const AddShedule = ({ open, setOpen, onSubmit, time, patient }: {
                   className="input-form"
                   name="bday"
                   defaultValue={patient?.bday}
-                  disabled={time?.block}
+                  disabled={time?.absent}
                   required
                 />
               </div>
@@ -90,7 +90,7 @@ const AddShedule = ({ open, setOpen, onSubmit, time, patient }: {
               className="input-form"
               name="address"
               defaultValue={patient?.address}
-              disabled={time?.block}
+              disabled={time?.absent}
               required
             />
             <label>Procedimento</label>
@@ -99,23 +99,36 @@ const AddShedule = ({ open, setOpen, onSubmit, time, patient }: {
               placeholder="Procedimento"
               className="input-form"
               name="service"
-              defaultValue={time?.schedule?.subtext}
-              disabled={time?.block}
+              defaultValue={time?.schedule?.procedure}
+              disabled={time?.absent}
               required
             />
+
+            <label>Doutor:</label>
+            <select id="dropdown" style={{ width: '150px', height: '20px', marginLeft: '5px' }} >
+              {doctors?.map((doctor) => (
+                <option key={doctor.id} value={doctor.name}>{doctor.name}</option>
+              ))}
+            </select>
+
+
+            <label>Valor</label>
+
+            <p>
+              R$
+              <input
+                type="text"
+                placeholder="Valor da consulta"
+                className="input-form"
+                name="value"
+                defaultValue={time?.schedule?.value}
+                disabled={time?.schedule ? true : false}
+                required
+              />
+            </p>
           </>)}
           <input type="submit" className="button-form" />
         </form>
-        {
-          (!absent && !time?.block && !time?.schedule) && (
-            <p className="value">
-              <span>
-                Valor Pago:
-              </span>
-              R$100,00
-            </p>
-          )
-        }
       </Offcanvas.Body>
     </Offcanvas >
   )

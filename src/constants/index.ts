@@ -22,7 +22,7 @@ const timesSchedule: Times[] = [
 
 
 const schedule: Schedule[] = [
-  { id: 0, patientId: patients[0].id, patient: patients[0].name, doctor: doctors[0].name, specialty: doctors[0].specialty, procedure: 'Extração', value: '100', date: '20/08/2023', time: timesSchedule[0].time, answered: true, status: true }
+  { id: 0, patientId: patients[0].id, patient: patients[0].name, doctor: doctors[0].name, procedure: 'Extração', value: '100', date: '20/08/2023', time: timesSchedule[0].time, answered: true, canceled: false }
 ]
 
 const notifications: NotificationNew[] = [
@@ -114,6 +114,9 @@ const headersTableQuery = [
   },
   {
     name: 'Horário'
+  },
+  {
+    name: 'Dr(a):'
   },
   {
     name: 'Valor'

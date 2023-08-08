@@ -73,14 +73,13 @@ export type Schedule = {
   id: number;
   patient: string;
   doctor: string;
-  specialty: string;
   procedure: string;
   value: string;
   date: string;
   time: string;
   answered: boolean,
   patientId: number,
-  status: boolean
+  canceled: boolean
 }
 
 
