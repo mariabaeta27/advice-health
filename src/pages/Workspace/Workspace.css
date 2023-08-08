@@ -109,4 +109,14 @@
   padding-left: 0px;
 }
 
-.workspace-notificantons {}
+.informations p {
+  font-weight: 500;
+  font-size: small;
+  color: #4f4d4d
+}
+
+.informations span {
+  font-weight: 300;
+  font-size: small;
+  color: #4f4d4d
+}

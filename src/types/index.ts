@@ -17,13 +17,6 @@ export type Patient = {
   address: string,
 }
 
-export type Notification = {
-  id: number;
-  text: string;
-  subText: string;
-  /* eslint-disable @typescript-eslint/no-explicit-any */
-  icon?: any
-}
 
 export type HeadersTable = {
   name: string;
@@ -42,17 +35,6 @@ export type Routes = {
   route: string;
 }
 
-
-export type BodyTableWorkspace = {
-  id: number;
-  status: boolean;
-  data: string;
-  time: string;
-  commitment: string;
-  patient: string;
-  local: string;
-  priority: string;
-}
 
 
 export type Doctor = {
@@ -83,7 +65,7 @@ export type Schedule = {
 }
 
 
-export type NotificationNew = {
+export type Notification = {
   id: number;
   type: string;
   informations: {

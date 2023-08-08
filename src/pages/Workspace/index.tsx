@@ -4,24 +4,33 @@ import { Card } from 'react-bootstrap'
 import { Calendar, Notifications, Search, Tables } from '../../components'
 import { headersTableWorkspace } from '../../constants'
 import { useEffect, useState } from 'react'
-import { BodyTableWorkspace, NotificationNew } from '../../types'
+import { Notification, Schedule } from '../../types'
 
 const Workspace = () => {
 
   const cols = ['status', 'patitent', 'date', 'time', 'doctor', 'procedure']
 
-  const [nativeBody, setNativeBody] = useState<BodyTableWorkspace[]>()
-  const [filterBody, setFilterBody] = useState<BodyTableWorkspace[]>()
+  const [nativeBody, setNativeBody] = useState<Schedule[]>()
+  const [filterBody, setFilterBody] = useState<Schedule[]>()
+  const [invoicing, Setinvoicing] = useState<number>()
 
 
-  const [notificantons, setNotificantons] = useState<NotificationNew[]>()
+  const [notificantons, setNotificantons] = useState<Notification[]>()
 
   const getData = () => {
-    const bodyTable = localStorage.getItem('bdSchedule')
-    setNativeBody(bodyTable && JSON.parse(bodyTable))
-    setFilterBody(bodyTable && JSON.parse(bodyTable))
+    const bdSchedule = localStorage.getItem('bdSchedule')
     const bdNotifications = localStorage.getItem('bdNotifications')
-    setNotificantons(bdNotifications && JSON.parse(bdNotifications))
+    const schedule = bdSchedule && JSON.parse(bdSchedule)
+    const notificantons = bdNotifications && JSON.parse(bdNotifications)
+
+    setNativeBody(schedule)
+    setFilterBody(schedule)
+    setNotificantons(notificantons)
+
+    console.log(schedule)
+    const value = schedule.reduce((total: number, shedule: Schedule) => total + Number(shedule?.value), 0)
+    Setinvoicing(value)
+
   }
 
   useEffect(() => {
@@ -112,6 +121,11 @@ const Workspace = () => {
           <h3 className='notice-title'>Avisos / Lembrentes</h3>
           <div>
             <Tables headers={headersTableWorkspace} bodyTable={bodySeg} columns={cols} />
+          </div>
+          <div className='informations'>
+            <p>Atendimentos do dia: <span>{nativeBody?.length}</span></p>
+            <p>Paciente atendidos do dia: <span>{nativeBody?.filter((item) => item?.answered).length}</span></p>
+            <p>Faturamento <span>{`R$ ${invoicing},00`}</span></p>
           </div>
         </div>
       </div>

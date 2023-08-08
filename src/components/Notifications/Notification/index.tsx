@@ -3,16 +3,16 @@ import { Card } from "react-bootstrap";
 import './Notification.css'
 import { useEffect, useState } from "react";
 import { CalendarIcon, CheckCircleIcon } from "@heroicons/react/24/outline";
-import { NotificationNew } from "../../../types";
+import { Notification as NotificationType } from "../../../types";
 
 const Notification = ({ notification }: {
-  notification: NotificationNew
+  notification: NotificationType
 }) => {
   const [icon, setIcon] = useState(<CheckCircleIcon />)
   const [title, setTitle] = useState('Pagamento realizado')
 
   useEffect(() => {
-    if (notification.type !== 'payment' && notification.type === 'shedule') {
+    if (notification?.type !== 'payment' && notification.type === 'shedule') {
       setIcon(<CalendarIcon />)
       setTitle('Consulta Agendada')
     }
@@ -31,11 +31,11 @@ const Notification = ({ notification }: {
           <h4>{title}</h4>
         </div>
         <div>
-          <p>Paciente: {notification.informations[0].name}</p>
+          <p>Paciente: {notification?.informations[0].name}</p>
 
           <span>
-            {`Data ${notification.type === 'payment' ? 'do pagamento' : 'da consulta'}:`}
-            <span>{notification.type === 'payment' ? `${notification.informations[0].datePayment}` : `${notification.informations[0].dateSheduled}`}</span>
+            {`Data ${notification?.type === 'payment' ? 'do pagamento' : 'da consulta'}:`}
+            <span>{notification?.type === 'payment' ? `${notification?.informations[0].datePayment}` : `${notification.informations[0].dateSheduled}`}</span>
           </span>
 
         </div>
