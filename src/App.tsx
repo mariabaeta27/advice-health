@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 import { BuildingOfficeIcon, CalendarDaysIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline'
 import { Route, Routes } from 'react-router-dom'
 import { Query, Shedule, Workspace } from './pages'
-import { bodyTableQuery, bodyTableWorkspace, doctors, patients, schedule, times, timesShedule } from './constants'
+import { bodyTableQuery, bodyTableWorkspace, doctors, notifications, patients, schedule, times, timesShedule } from './constants'
 
 
 const routes = [
@@ -40,6 +40,7 @@ function App() {
     const bdDoctors = localStorage.getItem('bdDoctors')
     const bdTimesShedule = localStorage.getItem('bdTimesShedule')
     const bdShedule = localStorage.getItem('bdShedule')
+    const bdNotifications = localStorage.getItem('bdNotifications')
 
 
     if (!bdPatients) {
@@ -53,6 +54,9 @@ function App() {
     }
     if (!bdShedule) {
       localStorage.setItem('bdShedule', JSON.stringify(schedule))
+    }
+    if (!bdNotifications) {
+      localStorage.setItem('bdNotifications', JSON.stringify(notifications))
     }
 
     const keyBodyTableWorkspace = localStorage.getItem('bodyTableWorkspace')
@@ -71,6 +75,8 @@ function App() {
     if (!keyBodyTableQuery) {
       localStorage.setItem('bodyTableQuery', JSON.stringify(bodyTableQuery))
     }
+
+
   }, [])
 
   return (
@@ -85,6 +91,8 @@ function App() {
           <Navbar open={open} setOpen={setOpen} routes={routes} />
         </Col>
         <Col md={8} className='bg-sucess'>
+
+
           <Routes>
             {routes.map((route) => (
               <Route key={route.label} path={route?.route} element={route?.element} />

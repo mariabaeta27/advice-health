@@ -1,37 +1,63 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { CalendarIcon, CheckCircleIcon } from '@heroicons/react/24/outline'
 import './Workspace.css'
 import { Card } from 'react-bootstrap'
 import { Calendar, Notifications, Search, Tables } from '../../components'
 import { headersTableWorkspace } from '../../constants'
 import { useEffect, useState } from 'react'
-import { BodyTableWorkspace } from '../../types'
-
-
-
-const notificationsWorkspace = [
-  { id: 1, text: 'Pagamento recebido', subText: 'Luiz', icon: <CheckCircleIcon /> },
-  { id: 2, text: 'Pagamento recebido', subText: 'Larissa', icon: <CalendarIcon /> },
-  { id: 3, text: 'Pagamento recebido', subText: 'Fernanda', icon: <CheckCircleIcon /> }
-]
-
+import { BodyTableWorkspace, NotificationNew } from '../../types'
 
 const Workspace = () => {
 
-  const cols = ['status', 'patitent', 'date', 'time', 'local', 'priority']
+  const cols = ['status', 'patitent', 'date', 'time', 'doctor', 'procedure']
 
   const [nativeBody, setNativeBody] = useState<BodyTableWorkspace[]>()
   const [filterBody, setFilterBody] = useState<BodyTableWorkspace[]>()
 
+
+  const [notificantons, setNotificantons] = useState<NotificationNew[]>()
+
   const getData = () => {
-    const bodyTable = localStorage.getItem('bodyTableWorkspace')
+    const bodyTable = localStorage.getItem('bdShedule')
     setNativeBody(bodyTable && JSON.parse(bodyTable))
     setFilterBody(bodyTable && JSON.parse(bodyTable))
+    const bdNotifications = localStorage.getItem('bdNotifications')
+    setNotificantons(bdNotifications && JSON.parse(bdNotifications))
   }
 
   useEffect(() => {
     getData()
   }, [])
+
+
+  const bodySeg: any = []
+
+
+  filterBody?.map((item: any) => {
+    const data = {
+      status: {
+        children: <input type="checkbox" checked={item?.answered} onChange={() => handleChecked(item?.id)} />
+      },
+      patitent: {
+        children: item?.patient
+      },
+      date: {
+        children: item.date
+      },
+      time: {
+        children: item.time
+      },
+      doctor: {
+        children: item.doctor
+      },
+      procedure: {
+        children: item.procedure
+      }
+    }
+    bodySeg.push(data)
+  })
+
+
+
 
 
   const body: any = []
@@ -114,7 +140,7 @@ const Workspace = () => {
         <div className='notice'>
           <h3 className='notice-title'>Avisos / Lembrentes</h3>
           <div>
-            <Tables headers={headersTableWorkspace} bodyTable={body} columns={cols} />
+            <Tables headers={headersTableWorkspace} bodyTable={bodySeg} columns={cols} />
           </div>
         </div>
       </div>
@@ -124,7 +150,7 @@ const Workspace = () => {
             <Calendar />
           </div>
           <div className='workspace-notificantons'>
-            <Notifications notifications={notificationsWorkspace} />
+            <Notifications notifications={notificantons} />
           </div>
         </div>
       </div>

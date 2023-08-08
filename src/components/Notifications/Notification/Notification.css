@@ -11,7 +11,7 @@
 .notifications {
   display: flex;
   background-color: #d9d9d9;
-  height: 60px;
+  height: 80px;
   margin-bottom: 5px;
   margin-left: 15px;
   width: 300px;
@@ -24,10 +24,18 @@
   margin-left: 10px;
 }
 
-.notifications-text h3 {
-  color: #d9d9d9;
+.notifications-text h4 {
+  color: #4f4d4d;
 }
 
-.notifications-text h5 {
-  color: #928f8f;
+.notifications-text p {
+  color: #4f4d4d;
+  font-size: small;
+  font-weight: 500;
+}
+
+.notifications-text span {
+  color: #4f4d4d;
+  font-size: x-small;
+  font-weight: 500;
 }

@@ -74,7 +74,20 @@ export type Schedule = {
   doctor: string;
   specialty: string;
   procedure: string;
-  valor: string;
-  data: string;
+  value: string;
+  date: string;
   time: string;
+  answered: boolean
+}
+
+
+export type NotificationNew = {
+  id: number;
+  type: string;
+  informations: {
+    name: string;
+    datePayment: string;
+    value: string;
+    dateSheduled: string;
+  }[];
 }

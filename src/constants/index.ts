@@ -1,4 +1,4 @@
-import { Doctor, Patient, Schedule, Times } from "../types"
+import { Doctor, NotificationNew, Patient, Schedule, Times } from "../types"
 
 const patients: Patient[] = [
   { id: 1, name: 'João da Mata', document: '000.000.000-00', bday: '28/06/1993', address: 'Rua 1' },
@@ -15,10 +15,29 @@ const timesShedule: Times[] = [
 
 
 const schedule: Schedule[] = [
-  { id: 0, patient: patients[0].name, doctor: doctors[0].name, specialty: doctors[0].specialty, procedure: 'Extração', valor: '100', data: '20/08/2023', time: timesShedule[0].time }
+  { id: 0, patient: patients[0].name, doctor: doctors[0].name, specialty: doctors[0].specialty, procedure: 'Extração', value: '100', date: '20/08/2023', time: timesShedule[0].time, answered: true }
 ]
 
-
+const notifications: NotificationNew[] = [
+  {
+    id: 0, type: 'payment', informations: [{
+      name: patients[0].name,
+      datePayment: '20/08/2023',
+      value: schedule[0].value,
+      dateSheduled: '25/08/2023'
+    }
+    ]
+  },
+  {
+    id: 0, type: 'shedule', informations: [{
+      name: patients[0].name,
+      datePayment: '20/08/2023',
+      value: schedule[0].value,
+      dateSheduled: '27/08/2023'
+    }
+    ]
+  }
+]
 
 
 
@@ -78,12 +97,9 @@ const headersTableWorkspace = [
     name: 'Horário'
   },
   {
-    name: 'Valor'
+    name: 'Dr(a):'
   },
-  {
-    name: 'Prioridade'
-  },
-
+  { name: 'Procedimento' }
 ]
 
 
@@ -133,15 +149,7 @@ const bodyTableQuery = [
     time: '10:00h',
     priority: 'Alta'
   },
-  {
-    id: 2,
-    status: true,
-    name: patients[1].name,
-    doctor: 'Dra. Fernanda',
-    date: '20/08/2023',
-    time: '15:00h',
-    priority: 'Baixa'
-  },
+
 ]
 
 const bodyTableWorkspace = [
@@ -193,7 +201,6 @@ const times = [
   { id: 1, time: '08:30' },
   { id: 2, time: '09:00', },
   { id: 3, time: '09:30' },
-  { id: 4, time: '10:00', schedule: { title: `${patients[1].name}`, subtext: 'Avaliação', patientId: patients[1].id }, block: false },
   { id: 5, time: '10:30' },
   { id: 6, time: '11:00' },
   { id: 7, time: '11:30', block: true },
@@ -204,7 +211,7 @@ const times = [
 
 
 
-export { months, weeksDay, headersTableWorkspace, bodyTableWorkspace, times, patients, headersTableQuery, bodyTableQuery, timesShedule, schedule, doctors }
+export { months, weeksDay, headersTableWorkspace, bodyTableWorkspace, times, patients, headersTableQuery, bodyTableQuery, timesShedule, schedule, doctors, notifications }
 
 
 

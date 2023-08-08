@@ -1,15 +1,11 @@
 import Notification from "./Notification"
-import { Notification as NotificationTypes } from '../../types'
+import { NotificationNew } from '../../types'
 
 
 const Notifications = ({ notifications }: {
-  notifications: {
-    id: number;
-    text: string;
-    subText: string;
-  }[]
+  notifications: NotificationNew[] | undefined
 }) => {
-  return (notifications.map((notification: NotificationTypes) => (
+  return (notifications?.map((notification: NotificationNew) => (
     <div key={notification.id}>
       <Notification notification={{ ...notification }} />
     </div>
