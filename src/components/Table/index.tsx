@@ -27,7 +27,7 @@ const Tables = ({ headers, bodyTable, columns }: {
             ))}
           </tr>
         </thead>
-        <tbody>
+        <tbody >
           {bodyTable.map((item: any) => (
             <tr key={item.id}>
               {columns.map((col: string, index: number) => (

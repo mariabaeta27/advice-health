@@ -9,8 +9,7 @@ import { Schedule } from '../../types'
 
 const Query = () => {
 
-  const cols = ['status', 'patitent', 'date', 'time', 'doctor', 'value', 'procedure', 'icon']
-
+  const cols = ['answered', 'patitent', 'date', 'time', 'doctor', 'value', 'procedure', 'icon']
 
   const [nativeBody, setNativeBody] = useState<any>()
   const [filterBody, setFilterBody] = useState<any>()
@@ -20,31 +19,25 @@ const Query = () => {
   const [openQuery, setOpenQuery] = useState(false)
   const [query, setQuey] = useState<Schedule | undefined>()
 
-
-
   const getData = () => {
     const bdSchedule = localStorage.getItem('bdSchedule')
     setNativeBody(bdSchedule && JSON.parse(bdSchedule))
     setFilterBody(bdSchedule && JSON.parse(bdSchedule))
   }
 
-
-
   useEffect(() => {
     getData()
   }, [])
 
-
-
   const handleQuery = (e: string) => {
     const newBody = nativeBody.filter((b: any) => {
       if (!advcancedFilter || advcancedFilter === 'patient') {
-        if (b.name.toLowerCase().includes(e)) {
-
+        if (b.patient.toLowerCase().includes(e)) {
+          console.log('aqui', b)
           return b
         }
-      } else if (advcancedFilter === 'doctor') {
-        if (b.doctor.toLowerCase().includes(e)) {
+      } else if (advcancedFilter === 'procedure') {
+        if (b.procedure.toLowerCase().includes(e)) {
           return b
         }
       } else {
@@ -52,9 +45,7 @@ const Query = () => {
       }
     })
     setFilterBody(newBody)
-
   }
-
 
   const body: any = []
 
@@ -75,7 +66,7 @@ const Query = () => {
 
   filterBody?.map((item: Schedule) => {
     const data = {
-      status: {
+      answered: {
         children: <input type="checkbox" checked={item?.answered} onChange={() => handleChecked(item?.id)} />
       },
       patitent: {
@@ -92,7 +83,7 @@ const Query = () => {
         children: item.doctor
       },
       value: {
-        children: item.value ? `R$ ${item.value}` : 'R$100,00'
+        children: item.value ? `R$ ${item.value},00` : 'R$100,00'
       },
       procedure: {
         children: item.procedure
@@ -152,13 +143,12 @@ const Query = () => {
             </div>
             {viewFilters && (
               <div className='a'>
-                <label>Doutor(a)</label>
-                <input name='advcanced-filter' value='doctor' type="radio" onChange={(e) => { setAdvcancedFilter(e.target.value) }} />
+                <label>Procedimento</label>
+                <input name='advcanced-filter' value='procedure' type="radio" onChange={(e) => { setAdvcancedFilter(e.target.value) }} />
                 <label>Paciente</label>
                 <input checked name='advcanced-filter' value='patient' type="radio" onChange={(e) => { setAdvcancedFilter(e.target.value) }} />
               </div>
             )}
-
           </div>
         </div>
       </div>
