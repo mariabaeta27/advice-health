@@ -17,22 +17,20 @@ const Patient = ({ open, setOpen, query }: {
     const bdPatients = localStorage.getItem('bdPatients')
 
     if (bdPatients) {
-      const newPatient = JSON.parse(bdPatients)?.filter((item: Patient) => item.id == query?.patientId)
+      const patients = JSON.parse(bdPatients)
+      const newPatient = patients?.filter((item: Patient) => item.id == query?.patientId)
       setPatient(newPatient[0])
     }
   }, [query])
 
   const onSubmit = (form: any) => {
-    const bdSchedule = localStorage.getItem('bdSchedule')
-
-
-    form.preventDefault()
     const [name, bday, address, document] = form.target
-
+    const bdSchedule = localStorage.getItem('bdSchedule')
     const bdPatients = localStorage.getItem('bdPatients')
 
     if (bdPatients) {
-      const newPatients = JSON.parse(bdPatients)?.map((item: Patient) => {
+      const patients = JSON.parse(bdPatients)
+      const newPatients = patients?.map((item: Patient) => {
         if (item.id === patient?.id) {
           return {
             ...item,
@@ -42,24 +40,25 @@ const Patient = ({ open, setOpen, query }: {
             address: address.value
           }
         } else {
-          return item
+          return { ...item }
         }
       })
-      localStorage.setItem('bdPatients', JSON.stringify(newPatients))
+      console.log(patient)
+      console.log(query)
+      console.log(newPatients)
+      newPatients && localStorage.setItem('bdPatients', JSON.stringify(newPatients))
     }
 
-
-
-
     if (bdSchedule) {
-      const newSchedule = JSON.parse(bdSchedule)?.map((item: Patient) => {
+      const schedule = JSON.parse(bdSchedule)
+      const newSchedule = schedule?.map((item: Patient) => {
         if (item.id === query?.id) {
           return {
             ...item,
-            name: name.value
+            patient: name.value
           }
         } else {
-          return item
+          return { ...item }
         }
       })
 
